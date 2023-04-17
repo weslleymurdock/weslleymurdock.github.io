@@ -1,0 +1,61 @@
+<section class="light" id="about">
+    @if (hero is not null)
+    {
+        <img class="background" src="@(hero.Src)" alt="@(hero.Alt)" />
+    }
+    <h2>My Resume</h2>
+    <div style="background-color: white; width: 50%; padding: 4rem; margin: 3rem auto; text-align: center;">
+        @if (_resume is null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            <div class="portfolio-hero">
+                @if (_resume is not null)
+                {
+                    <p>
+                        @_resume.Name
+                    </p>
+                }
+
+                <div class="container">
+                    <div class="box">
+                        <h3>@_resume?.Actual!.Name : @_resume?.Role</h3>
+                        <p class="small">@_resume?.Actual!.Role</p>
+                        <p class="small">Start Date: @_resume?.Actual!.Start</p>
+                        <p class="small">End Date: @_resume?.Actual!.End</p>
+                    </div>
+
+
+                    @foreach (var experience in _resume!.Experiences)
+                    {
+                        <div class="box">
+                            <h3>@experience.Name </h3>
+                            <p class="small">@experience.Role</p>
+                            <p class="small">Start Date: @experience.Start</p>
+                            <p class="small">End Date: @experience.End</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+@code {
+    [Parameter, EditorRequired]
+    public required HttpClient Http { get; set; }
+
+    [Parameter, EditorRequired]
+    public required HeroImageService HeroImageService { get; set; }
+
+    private weslleymurdock.github.io.Models.Resume? _resume;
+    private HeroImage? hero;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _resume = await Http.GetFromJsonAsync<weslleymurdock.github.io.Models.Resume>("sample-data/resume.json");
+        hero = await HeroImageService.GetHeroAsync(img => img.Name is "resume");
+    }
+}

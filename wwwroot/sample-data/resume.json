@@ -1,0 +1,88 @@
+{
+  "name": "Weslley de Souza Gomes Luiz",
+  "role": "C# .NET Mid Developer",
+  "goal": "Build a carrer using the best technologies to ship reliable solutions",
+  "educations": [
+    {
+      "schoolName": "Escola Estadual Batista Renzi",
+      "courseName": "Ensino Médio",
+      "start": "01/01/2009",
+      "end": "01/12/2011"
+    },
+    {
+      "schoolName": "SENAI Luiz Eulálio de Bueno Vidigal Filho",
+      "courseName": "Ensino Técnico em Mecanica",
+      "start": "01/01/2010",
+      "end": "01/12/2011"
+    },
+    {
+      "schoolName": "SENAI Frederico Jacob",
+      "courseName": "Ensino Técnico em EletroEletronica",
+      "start": "01/01/2014",
+      "end": "01/12/2015"
+    },
+    {
+      "schoolName": "FATEC - Faculdade de Tecnologia",
+      "courseName": "Graduação em Analise e desenvolvimento de sistemas",
+      "start": "01/08/2018",
+      "end": "01/08/2022"
+    },
+    {
+      "schoolName": "Anhembi Morumbi",
+      "courseName": "Graduação em Analise e desenvolvimento de sistemas",
+      "start": "01/08/2022",
+      "end": "01/07/2023"
+    }
+  ],
+  "actual": {
+    "name": "I4C",
+    "role": ".Net Mid Mobile Developer",
+    "start": "01/03/2023",
+    "end": "",
+    "isCurrent": true
+  },
+  "experiences": [
+    {
+      "name": "Vericode",
+      "role": ".Net Mid Developer",
+      "start": "01/01/2022",
+      "end": "20/08/2023",
+      "isCurrent": false
+    },
+    {
+      "name": "Vericode",
+      "role": ".Net Jr Developer",
+      "start": "01/01/2021",
+      "end": "01/01/2022",
+      "isCurrent": false
+    },
+    {
+      "name": "Vericode",
+      "role": ".Net Trainee Developer",
+      "start": "29/10/2019",
+      "end": "01/01/2021",
+      "isCurrent": false
+    },
+    {
+      "name": "Luz Digital",
+      "role": ".Net Jr Developer",
+      "start": "01/09/2019",
+      "end": "28/10/2022",
+      "isCurrent": false
+    },
+    {
+      "name": "Luz Digital",
+      "role": ".Net Intern Developer",
+      "start": "01/07/2019",
+      "end": "01/09/2022",
+      "isCurrent": false
+    },
+    {
+      "name": "Handphone",
+      "role": ".Net Jr Developer",
+      "start": "08/01/2016",
+      "end": "01/03/2018",
+      "isCurrent": false
+    }
+  ]
+}
