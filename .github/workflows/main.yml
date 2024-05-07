@@ -33,7 +33,7 @@ jobs:
         run: dotnet publish weslleymurdock.github.io.csproj -c:Release -p:GHPages=true -o dist/Web --nologo
 
       - name: Commit wwwroot to GitHub Pages
-        if: contains(github.event.head_commit.message, 'deploy')
+        if: contains(github.ref, 'refs/heads/main')
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
