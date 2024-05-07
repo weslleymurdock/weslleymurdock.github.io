@@ -34,14 +34,15 @@
       "end": "01/07/2023"
     }
   ],
-  "actual": {
-    "name": "I4C",
-    "role": ".Net Mid Mobile Developer",
-    "start": "01/03/2023",
-    "end": "",
-    "isCurrent": true
-  },
+  "actual": {},
   "experiences": [
+    {
+      "name": "I4C",
+      "role": ".Net Mid Mobile Developer",
+      "start": "01/03/2023",
+      "end": "30/04/2024",
+      "isCurrent": false
+    },
     {
       "name": "Vericode",
       "role": ".Net Mid Developer",
