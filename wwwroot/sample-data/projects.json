@@ -13,5 +13,15 @@
     "title": "setup-maui-action",
     "description": "Github repo that contains a github action to install .NET MAUI into github workflows. Published in marketplace",
     "url": "https://github.com/weslleymurdock/setup-maui-action/"
+  },
+  {
+    "title": "libpjsua2-android",
+    "description": "Github repo that contains actions to build the pjsip library to android targets. Used by libpjsua2maui",
+    "url": "https://github.com/weslleymurdock/libpjsua2-android/"
+  },
+  {
+    "title": "libpjsua2-ios",
+    "description": "Github repo that contains actions to build the pjsip library to ios targets. Used by libpjsua2maui",
+    "url": "https://github.com/weslleymurdock/libpjsua2-ios/"
   }
 ]
