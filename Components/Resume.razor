@@ -20,12 +20,15 @@
                 }
 
                 <div class="container">
-                    <div class="box">
-                        <h3>@_resume?.Actual!.Name : @_resume?.Role</h3>
-                        <p class="small">@_resume?.Actual!.Role</p>
-                        <p class="small">Start Date: @_resume?.Actual!.Start</p>
-                        <p class="small">End Date: @_resume?.Actual!.End</p>
-                    </div>
+                    @if (_resume?.Actual is not null)
+                    {
+                        <div class="box">
+                            <h3>@_resume?.Actual!.Name : @_resume?.Role</h3>
+                            <p class="small">@_resume?.Actual!.Role</p>
+                            <p class="small">Start Date: @_resume?.Actual!.Start</p>
+                            <p class="small">End Date: @_resume?.Actual!.End</p>
+                        </div>
+                    }
 
 
                     @foreach (var experience in _resume!.Experiences)
