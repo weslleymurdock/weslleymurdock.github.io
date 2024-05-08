@@ -1,7 +1,7 @@
 {
   "entryAssembly": "weslleymurdock.github.io",
   "resources": {
-    "hash": "sha256-s0lebSF+ciFqrrx81hpZluHYvP65MkOrR2X+qBWPAdo=",
+    "hash": "sha256-jLz212634l0r+BdiQkf3OaeSxHGnDhwSdtZNv60Ukq8=",
     "runtime": {
       "dotnet.7.0.18.yczjibhkds.js": "sha256-lsqy0PQ8nf1/0sSlLGe3Kfwi8V0Q1QzVy5+AqtJ3cfU=",
       "dotnet.timezones.blat": "sha256-aPcvvHoFVwCzeRxTOvMTcrI2l2HKJO0sjSN7IF10LUQ=",
@@ -45,7 +45,7 @@
       "System.Runtime.InteropServices.JavaScript.dll": "sha256-/2WLMXkoPmNvWF8/bofQs5b+QbV8G1d/l04psNt/ZVQ=",
       "System.Text.Encodings.Web.dll": "sha256-6uvUVfZwaEU12wV64pQSej1J/at2l9/gzyowQ8PhW4U=",
       "System.Text.Json.dll": "sha256-010vJ7cg/1G3CfS363qUqQXweVONUdAJkjMucQ+BoVY=",
-      "weslleymurdock.github.io.dll": "sha256-itQ8nZqcWTo1UATe1d9YFMjgQpY4ILjBSOm4U3QN9k4="
+      "weslleymurdock.github.io.dll": "sha256-8KINQQRhrXksSTgrw613EPqLWYcDcpVmAktetxt0ME0="
     },
     "runtimeAssets": {
       "dotnet.wasm": {
