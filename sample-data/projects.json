@@ -1,7 +1,27 @@
 [
   {
     "title": "My Resume Site",
-    "description": "Created from Microsoft's resume workshop and deployed to GitHub pages. Includes my experience and design abilities.",
-    "url": "https://github.com/microsoft/workshop-library/tree/main/full/build-resume-website"
+    "description": "Github pages for share my personal projects and demonstrate skills",
+    "url": "https://github.com/weslleymurdock/weslleymurdock.github.io/"
+  },
+  {
+    "title": "libpjsua2maui",
+    "description": "Github repo that contains actions to build a native library and bind it to use native methods in .NET MAUI apps. Also have a published nuget package",
+    "url": "https://github.com/weslleymurdock/libpjsua2maui/"
+  },
+  {
+    "title": "setup-maui-action",
+    "description": "Github repo that contains a github action to install .NET MAUI into github workflows. Published in marketplace",
+    "url": "https://github.com/weslleymurdock/setup-maui-action/"
+  },
+  {
+    "title": "libpjsua2-android",
+    "description": "Github repo that contains actions to build the pjsip library to android targets. Used by libpjsua2maui",
+    "url": "https://github.com/weslleymurdock/libpjsua2-android/"
+  },
+  {
+    "title": "libpjsua2-ios",
+    "description": "Github repo that contains actions to build the pjsip library to ios targets. Used by libpjsua2maui",
+    "url": "https://github.com/weslleymurdock/libpjsua2-ios/"
   }
 ]
