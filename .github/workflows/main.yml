@@ -2,7 +2,9 @@ name: Deploy to GitHub Pages
 
 
 on:
-
+  push:
+    branches:
+      - main
   pull_request:
     types: [opened, synchronize, reopened] 
     branches:
@@ -33,7 +35,7 @@ jobs:
         run: dotnet publish weslleymurdock.github.io.csproj -c:Release -p:GHPages=true -o dist/Web --nologo
 
       - name: Commit wwwroot to GitHub Pages
-        if: contains(github.ref, 'refs/heads/main')
+        if: contains(github.ref, 'main')
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
