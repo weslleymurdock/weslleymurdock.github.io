@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web</title>
+    <base href="/" />
+    <link rel="preload" id="webassembly" />
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link href="Web.styles.css" rel="stylesheet" />
+    <script type="importmap"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    <!-- Important: Increment the version parameter whenever you update MudBlazor to prevent caching issues -->
+    <link href="_content/MudBlazor/MudBlazor.min.css?v=1" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="app">
+        <style>
+            @keyframes slide {
+                0% {
+                    transform: translateX(-25%);
+                }
+
+                100% {
+                    transform: translateX(25%);
+                }
+            }
+
+            .mud-wasm {
+                animation: slide 3s ease-in-out infinite alternate;
+                background-image: linear-gradient(-60deg,#1E88E5 50%,#0069c0 50%);
+                bottom: 0;
+                left: -50%;
+                opacity: .5;
+                position: fixed;
+                right: -50%;
+                top: 0;
+                z-index: -1
+            }
+
+            .mud-wasm-cont {
+                left: 50%;
+                padding: 10vmin;
+                position: fixed;
+                text-align: center;
+                top: 50%;
+                transform: translate(-50%,-50%)
+            }
+        </style>
+
+        <div style="height:100%;width:100%;margin:0;position:fixed;">
+            <div class="mud-wasm"></div>
+            <div class="mud-wasm" style="animation-direction:alternate-reverse;animation-duration:4s;"></div>
+            <div class="mud-wasm" style="animation-duration:5s;"></div>
+            <div class="mud-wasm-cont ">
+
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid meet">
+                    <path d="M0 0 C12.87 0 25.74 0 39 0 C39.86478033 54.74732202 40.13397614 109.47855503 40.07202661 164.23223901 C40.05831594 176.58190474 40.05327475 188.93157467 40.04751682 201.28124619 C40.03833697 220.52084056 40.0183545 239.76040711 40 259 C77.29 259 114.58 259 153 259 C153 173.53 153 88.06 153 0 C234.84 0 316.68 0 401 0 C401 105.6 401 211.2 401 320 C388.46 320 375.92 320 363 320 C362.01326514 267.13348264 361.87176379 214.28224478 361.92797339 161.40756142 C361.94160961 148.33860744 361.94671153 135.26964964 361.95248318 122.20069027 C361.96170178 101.80045109 361.9816746 81.40023776 362 61 C320.42 61 278.84 61 236 61 C236.01160156 73.91511719 236.02320313 86.83023438 236.03515625 100.13671875 C236.04028552 108.48112 236.04514299 116.82552006 236.04882812 125.16992188 C236.05468314 138.31925868 236.06142788 151.46858893 236.07543945 164.61791992 C236.08565443 174.20915747 236.09191433 183.80038954 236.09408849 193.39163238 C236.09535208 198.43356212 236.09813924 203.47547622 236.10573006 208.51740074 C236.15510598 245.69157222 235.53883694 282.82025084 235 320 C157.45 320 79.9 320 0 320 C0 214.4 0 108.8 0 0 Z " fill="#FFFFFF" transform="translate(61,97)" />
+                    <path d="M0 0 C13.2 0 26.4 0 40 0 C40 85.8 40 171.6 40 260 C26.8 260 13.6 260 0 260 C0 174.2 0 88.4 0 0 Z " fill="#FFFFFF" transform="translate(340,159)" />
+                    <path d="M0 0 C13.2 0 26.4 0 40 0 C40 85.8 40 171.6 40 260 C26.8 260 13.6 260 0 260 C0 174.2 0 88.4 0 0 Z " fill="#FFFFFF" transform="translate(137,95)" />
+                </svg>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="." class="reload">Reload</a>
+        <span class="dismiss">🗙</span>
+    </div>
+    <script src="_framework/blazor.webassembly#[.{fingerprint}].js"></script>
+    <!-- Important: Increment the version parameter whenever you update MudBlazor to prevent caching issues -->
+    <script src="_content/MudBlazor/MudBlazor.min.js?v=1"></script>
+
+</body>
+
+</html>
