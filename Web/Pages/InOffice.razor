@@ -1,0 +1,61 @@
+﻿@page "/in-office"
+
+<PageTitle>@Localizer["InOfficeActPageTitle"]</PageTitle>
+<MudContainer Class="pa-10 ">
+    <div class="text-center mb-10">
+        <MudText Typo="Typo.h2" Color="Color.Primary" Align="Align.Center" Style="font-weight: 800;">@Localizer["InOfficeAct"]</MudText>
+        <MudText Typo="Typo.h5" Color="Color.Surface" Align="Align.Center" Class="mt-2 mb-10">@Localizer["InOfficeActDescription"]</MudText>
+    </div>
+
+    <MudTimeline TimelinePosition="TimelinePosition.Alternate">
+   
+        @if (experiences == null)
+        {
+            <div class="d-flex justify-center mt-10">
+                <MudProgressCircular Color="Color.Success" Indeterminate="true" />
+            </div>
+        }
+        else
+        {
+            @foreach (var item in experiences)
+            {
+                <MudTimelineItem Color="Color.Primary" Elevation="25">
+                    <ItemContent>
+                        <MudPaper Class="glass-cmyk-bg">
+                            <MudPaper Class="pa-5 mt-5 mb-5">
+                                <MudText Typo="Typo.h5" Color="Color.Surface">@item.Title</MudText>
+                            </MudPaper>
+                            <MudPaper Class="pa-5 mt-5 mb-5 glass-rgb-bg">
+                                <MudText Typo="Typo.h6">@item.Company (@(DateTime.Parse(@item.StartDate).ToString(System.Globalization.CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern)) - @(DateTime.Parse(@item.EndDate).ToString(System.Globalization.CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern)))</MudText>
+                                <MudText Typo="Typo.body1" Class="mt-2" Color="Color.Dark"> @item.JobDescription </MudText>
+                            </MudPaper>
+                            <MudPaper Class="pa-5 mt-5 mb-5 glass-rgb-bg">
+                                <MudChipSet T="MudChip<string>" Class="mt-2" Color="Color.Primary" Size="Size.Small">
+                                    @foreach (var tech in item.Technologies)
+                                    {
+                                        <MudChip T="string" Style=" background: radial-gradient( circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.25), transparent 55% ), linear-gradient( 120deg,  var(--cmyk-m), var(--cmyk-y)); color: var(--mud-palette-dark);">@tech</MudChip>
+                                    }
+                                </MudChipSet>
+                            </MudPaper>
+                        </MudPaper>
+                    </ItemContent>
+                </MudTimelineItem>
+            }
+        }
+    </MudTimeline>
+</MudContainer>
+@code {
+    private List<InOfficeExperience>? experiences;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender || experiences == null || experiences.Count <= 0)
+        {
+            experiences = await Http.GetFromJsonAsync<List<InOfficeExperience>>("data/inoffice.json");
+
+            StateHasChanged();
+        }
+        
+        await base.OnAfterRenderAsync(firstRender);
+    }
+}

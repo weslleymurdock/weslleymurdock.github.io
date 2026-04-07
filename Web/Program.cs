@@ -1,12 +1,3 @@
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.Localization;
-using MudBlazor.Services;
-using System.Globalization;
-using Web;
-using Web.Application.Services.Abstract;
-using Web.Infrastructure.Services.Concrete;
-
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
 builder.RootComponents.Add<App>("#app");

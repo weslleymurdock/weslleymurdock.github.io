@@ -118,7 +118,91 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ApplicationTitle" xml:space="preserve">
-    <value>Weslley Luiz - Desenvolvedor .NET Fullstack</value>
+    <value>Weslley Luiz</value>
     <comment>Titulo da appbar</comment>
+  </data>
+  <data name="ContactLabel" xml:space="preserve">
+    <value>Contato</value>
+    <comment>Label contato</comment>
+  </data>
+  <data name="ContactPageTitle" xml:space="preserve">
+    <value>Contato | Portfólio</value>
+    <comment>Titulo da página contato</comment>
+  </data>
+  <data name="EmailMandatoryLabel" xml:space="preserve">
+    <value>O e-mail é obrigatório!</value>
+    <comment>Erro de email obrigatório</comment>
+  </data>
+  <data name="HomePageCenterText" xml:space="preserve">
+    <value>Áreas de Especialidade</value>
+    <comment>Título central da home page</comment>
+  </data>
+  <data name="HomePageTitle" xml:space="preserve">
+    <value>Início  | Portfólio</value>
+    <comment>Titulo da home page</comment>
+  </data>
+  <data name="InOfficeAct" xml:space="preserve">
+    <value>Atuação Corporativa</value>
+    <comment>Subtítulo da pagina de experiencias</comment>
+  </data>
+  <data name="InOfficeActDescription" xml:space="preserve">
+    <value>Minha trajetória em empresas como colaborador interno.</value>
+    <comment>Descrição do subtítulo</comment>
+  </data>
+  <data name="InOfficeActPageTitle" xml:space="preserve">
+    <value>Experiência Corporativa | Portfólio</value>
+    <comment>Título da página de experiências corporativas.</comment>
+  </data>
+  <data name="JobSubtitle" xml:space="preserve">
+    <value>Construindo soluções robustas para Web, Mobile e Desktop desde 2016.</value>
+    <comment>Subtitulo</comment>
+  </data>
+  <data name="JobTitle" xml:space="preserve">
+    <value>Desenvolvedor .NET Full Stack</value>
+    <comment>Titulo da função</comment>
+  </data>
+  <data name="NameMandatoryLabel" xml:space="preserve">
+    <value>O nome é obrigatório!</value>
+    <comment>Erro de nome obrigatório</comment>
+  </data>
+  <data name="NotFoundCardContent" xml:space="preserve">
+    <value>Desculpe, o conteúdo procurado não foi encontrado</value>
+    <comment>Card content</comment>
+  </data>
+  <data name="NotFoundCardTitle" xml:space="preserve">
+    <value>Conteúdo não encontrado</value>
+    <comment>Conteúdo não encontrado</comment>
+  </data>
+  <data name="NotFoundPageTitle" xml:space="preserve">
+    <value>Não Encontrado | Portifólio</value>
+    <comment>Titulo da pátina não encontrado</comment>
+  </data>
+  <data name="ProfileLabel" xml:space="preserve">
+    <value>Gostou do meu perfil? Vamos trabalhar juntos!</value>
+    <comment>Label do perfil</comment>
+  </data>
+  <data name="ProjectsPageTitle" xml:space="preserve">
+    <value>Projetos | Portifólio</value>
+    <comment>Titulo da pagina projetos do portifólio</comment>
+  </data>
+  <data name="ProjectsSubtitle" xml:space="preserve">
+    <value>Confira algumas das soluções que desenvolvi ao longo da minha jornada.</value>
+    <comment>Subtítulo da pagina projetos</comment>
+  </data>
+  <data name="ProjectsTitle" xml:space="preserve">
+    <value>Meus Projetos</value>
+    <comment>Título da pagina meus projetos</comment>
+  </data>
+  <data name="SendEmail" xml:space="preserve">
+    <value>Enviar Mensagem</value>
+    <comment>Botão enviar mensagem</comment>
+  </data>
+  <data name="SendWhatsApp" xml:space="preserve">
+    <value>WhatsApp</value>
+    <comment>Botão whatsapp</comment>
+  </data>
+  <data name="WriteMessageLabel" xml:space="preserve">
+    <value>Por favor, escreva uma mensagem.</value>
+    <comment>Label de erro escreva mensagem</comment>
   </data>
 </root>

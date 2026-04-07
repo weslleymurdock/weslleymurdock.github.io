@@ -1,21 +1,20 @@
 ﻿@inherits LayoutComponentBase
-
-@inject IAppLocalizer Localizer
-<MudThemeProvider />
-<MudPopoverProvider />
+<MudThemeProvider Theme="@Theme.AppTheme.Default" />
 <MudDialogProvider />
 <MudSnackbarProvider />
-<MudLayout>
-    <MudAppBar Elevation="1">
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-        <MudText Typo="Typo.h5" Class="ml-3">@Localizer["ApplicationTitle"]</MudText>
+<MudPopoverProvider />
+
+<MudLayout Style="background: radial-gradient( circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.25), transparent 55% ), linear-gradient( 120deg, var(--rgb-b), var(--cmyk-y)); color: var(--mud-palette-dark); ">
+    <MudAppBar Elevation="1" Style="background: radial-gradient( circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.25), transparent 55% ), linear-gradient( 120deg, var(--rgb-b), var(--cmyk-y)); color: var(--mud-palette-dark); ">
+        <MudIconButton Icon="@(_drawerOpen ? Icons.Material.Filled.MenuOpen : Icons.Material.Filled.Menu)" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+        <MudText Typo="Typo.h3" Class="ml-2">@Localizer["ApplicationTitle"]</MudText>
         <MudSpacer />
         <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
     </MudAppBar>
-    <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
-        <NavMenu/>
+    <MudDrawer Style="background: radial-gradient( circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.25), transparent 55% ), linear-gradient( 120deg, var(--rgb-b), var(--cmyk-y)); color: var(--mud-palette-dark); " @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
+        <NavMenu />
     </MudDrawer>
-    <MudMainContent>
+    <MudMainContent Style="background: radial-gradient( circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.25), transparent 55% ), linear-gradient( 120deg, var(--rgb-b), var(--cmyk-y)); color: var(--mud-palette-dark); ">
         @Body
     </MudMainContent>
 </MudLayout>

@@ -1,98 +1,116 @@
 ﻿@page "/"
+@inject IJSRuntime JS
+<PageTitle>@Localizer["HomePageTitle"]</PageTitle>
 
-<PageTitle>Home</PageTitle>
+<MudContainer Class="mt-10 pa-10">
+    <div class="text-center mb-10">
+        <MudText Typo="Typo.h2" Color="Color.Primary" Align="Align.Center" Style="font-weight: 800;">@Localizer["JobTitle"]</MudText>
+        <MudText Typo="Typo.h5" Color="Color.Warning" Align="Align.Center" Class="mt-2">@Localizer["JobSubtitle"]</MudText>
+    </div>
 
+    <MudText Typo="Typo.h4" Align="Align.Center" GutterBottom="true" Class="mt-12 mb-6">@Localizer["HomePageCenterText"]</MudText>
+    
+    @if (cards == null)
+    {
+        <div class="d-flex pa-6 mt-6 mb-6 justify-center">
+            <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+        </div>
+    }
+    else
+    {
+        <MudCarousel TData="FeatureCard" EnableSwipeGesture="true" AutoCycleTime="@TimeSpan.FromSeconds(5)" AutoCycle="true" ShowArrows="true" ShowBullets="true" Style="height: 420px;" Class="mud-width-full rounded-xl">
+            @foreach (var card in cards)
+            {
+                <MudCarouselItem Transition="Transition.Slide">
+                    <div class="d-flex justify-center align-center" style="height: 100%;">
+                        <MudCard Elevation="0" Class="ma-6 d-flex flex-column align-center glass-cmyk-bg" Style="max-width: 600px; width: 100%;">
+                            <MudCardHeader Class="glass-rgb-bg" Style="width: 100%;">
+                                <CardHeaderAvatar>
+                                    <MudIcon Icon="@card.Icon" Size="Size.Large" Color="Color.Primary" />
+                                </CardHeaderAvatar>
+                                <CardHeaderContent>
+                                    <MudText Typo="Typo.h5" Style="font-weight: 700;">@card.Title</MudText>
+                                    <MudText Typo="Typo.subtitle1" Color="Color.Tertiary">@card.Subtitle</MudText>
+                                </CardHeaderContent>
+                            </MudCardHeader>
+                            <MudCardContent>
+                                <MudText Typo="Typo.body1">@card.Description</MudText>
+                                <MudList T="string" Class="mt-2">
+                                    @foreach (var benefit in card.BulletPoints)
+                                    {
+                                        <MudListItem Icon="@Icons.Material.Filled.Check" IconColor="Color.Success">
+                                            @benefit
+                                        </MudListItem>
+                                    }
+                                </MudList>
+                            </MudCardContent>
+                        </MudCard>
+                    </div>
+                </MudCarouselItem>
+            }
+        </MudCarousel>
+    }
 
-<MudContainer Class="mt-16">
-    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Pricing</MudText>
-    <MudText Align="Align.Center">Some long pricing text should go here maybe? who knows what text you would want here, i guess i cant fill it in for you.</MudText>
-    <MudGrid Class="mt-8">
-        <MudItem xs="12" sm="6" md="4">
-            <MudCard Elevation="25" Class="rounded-lg pb-4">
-                <MudCardHeader>
-                    <CardHeaderContent>
-                        <MudText Typo="Typo.h5" Align="Align.Center">Beginner</MudText>
-                    </CardHeaderContent>
-                </MudCardHeader>
-                <MudCardContent>
-                    <div class="d-flex justify-center">
-                        <MudText Typo="Typo.h3">$5</MudText>
-                        <MudText Typo="Typo.h5" Class="ml-1 mt-5" Color="Color.Secondary">/Monthly</MudText>
-                    </div>
-                    <MudList T="string" Class="mx-auto mt-4" Style="width:300px;">
-                        <MudListItem Icon="@Icons.Material.Filled.LiveHelp">
-                            Unlimited something
-                        </MudListItem>
-                        <MudListItem Icon="@Icons.Material.Filled.LiveHelp">
-                            10 something
-                        </MudListItem>
-                        <MudListItem Icon="@Icons.Material.Filled.LiveHelp">
-                            No something
-                        </MudListItem>
-                    </MudList>
-                </MudCardContent>
-                <MudCardActions Class="d-flex justify-center">
-                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;">Start now</MudButton>
-                </MudCardActions>
-            </MudCard>
-        </MudItem>
-        <MudItem xs="12" sm="6" md="4">
-            <MudCard Elevation="25" Class="rounded-lg pb-4">
-                <MudCardHeader>
-                    <CardHeaderContent>
-                        <MudText Typo="Typo.h5" Align="Align.Center">Starter</MudText>
-                    </CardHeaderContent>
-                </MudCardHeader>
-                <MudCardContent>
-                    <div class="d-flex justify-center">
-                        <MudText Typo="Typo.h3">$10</MudText>
-                        <MudText Typo="Typo.h5" Class="ml-1 mt-5" Color="Color.Secondary">/Monthly</MudText>
-                    </div>
-                    <MudList T="string" Class="mx-auto mt-4" Style="width:300px;">
-                        <MudListItem Icon="@Icons.Material.Filled.LiveHelp">
-                            Unlimited something
-                        </MudListItem>
-                        <MudListItem Icon="@Icons.Material.Filled.LiveHelp">
-                            10 something
-                        </MudListItem>
-                        <MudListItem Icon="@Icons.Material.Filled.LiveHelp">
-                            No something
-                        </MudListItem>
-                    </MudList>
-                </MudCardContent>
-                <MudCardActions Class="d-flex justify-center">
-                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;">Start now</MudButton>
-                </MudCardActions>
-            </MudCard>
-        </MudItem>
-        <MudItem xs="12" sm="12" md="4">
-            <MudCard Elevation="25" Class="rounded-lg pb-4">
-                <MudCardHeader>
-                    <CardHeaderContent>
-                        <MudText Typo="Typo.h5" Align="Align.Center">Professional</MudText>
-                    </CardHeaderContent>
-                </MudCardHeader>
-                <MudCardContent>
-                    <div class="d-flex justify-center">
-                        <MudText Typo="Typo.h3">$15</MudText>
-                        <MudText Typo="Typo.h5" Class="ml-1 mt-5" Color="Color.Secondary">/Monthly</MudText>
-                    </div>
-                    <MudList T="string" Class="mx-auto mt-4" Style="width:300px;">
-                        <MudListItem Icon="@Icons.Material.Filled.LiveHelp">
-                            Unlimited something
-                        </MudListItem>
-                        <MudListItem Icon="@Icons.Material.Filled.LiveHelp">
-                            10 something
-                        </MudListItem>
-                        <MudListItem Icon="@Icons.Material.Filled.LiveHelp">
-                            No something
-                        </MudListItem>
-                    </MudList>
-                </MudCardContent>
-                <MudCardActions Class="d-flex justify-center">
-                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;">Start now</MudButton>
-                </MudCardActions>
-            </MudCard>
-        </MudItem>
+    <MudText Typo="Typo.h4" Align="Align.Center" GutterBottom="true" Class="mt-16 mb-6">Stacks Principais</MudText>
+    <MudGrid Justify="Justify.Center">
+        @if (items == null)
+        {
+            <div class="d-flex justify-center mt-10">
+                <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+            </div>
+        }
+        else
+        {
+            @foreach (var item in items)
+            {
+                <MudItem xs="12" md="4">
+                    <MudCard Elevation="0" Class="ma-6 d-flex flex-column align-center glass-cmyk-bg" Style="height: 100%;">
+                        <MudCardHeader Class="glass-rgb-bg" Style="width:100%; height:15%">
+                            <CardHeaderAvatar>
+                                <MudIcon Icon="@item.Icon" Size="Size.Large" Color="Color.Primary" />
+                            </CardHeaderAvatar>
+                            <CardHeaderContent>
+                                <MudText Typo="Typo.h6" Style="font-weight: 600;">@item.Title</MudText>
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                        <div class="d-flex flex-wrap justify-center gap-2 mt-4">
+                            @foreach (var chip in item.Chips)
+                            {
+                                <MudChip T="string" Variant="Variant.Filled" Style="background: radial-gradient( circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.25), transparent 55% ), linear-gradient( 120deg, var(--mud-palette-secondary), var(--cmyk-y)); color: var(--mud-palette-dark); font-weight: 600;">@chip</MudChip>
+                            }
+                        </div>
+                    </MudCard>
+                </MudItem>
+            }
+        }
     </MudGrid>
-</MudContainer>
+</MudContainer> 
+@code {
+    private List<FeatureCard>? cards;
+    private List<SkillItem>? items;
+    private bool _isAtTop = true;
+    private string FabIcon => _isAtTop
+        ? Icons.Material.Filled.KeyboardArrowDown
+        : Icons.Material.Filled.KeyboardArrowUp;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender || cards is null || items is null || cards.Count <= 0 || items.Count <= 0)
+        {
+            await JS.InvokeVoidAsync("app.initGlass");
+            cards = await Http.GetFromJsonAsync<List<FeatureCard>>("data/cards.json");
+            items = await Http.GetFromJsonAsync<List<SkillItem>>("data/items.json");
+ 
+            _isAtTop = await JS.InvokeAsync<bool>("app.isAtTop");
+            StateHasChanged();
+        }
+    }
+
+    private async Task OnFABClick()
+    {
+        await JS.InvokeVoidAsync(_isAtTop ? "app.scrollToBottom" : "app.scrollToTop");
+        _isAtTop = !_isAtTop;
+    }
+
+
+}

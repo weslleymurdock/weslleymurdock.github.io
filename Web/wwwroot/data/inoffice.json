@@ -1,0 +1,88 @@
+[
+  {
+    "Title": "Analista de desenvolvimento Pleno III",
+    "Company": "Lockton",
+    "StartDate": "2023-03-01",
+    "EndDate": "2024-04-30",
+    "JobDescription": "Desenvolvimento de sistemas internos para gestão de seguros, utilizando .NET MAUI, ASP.NET, Blazor e SQL Server. Participação em projetos de automação de testes e processos e integração de APIs.",
+    "Technologies": [
+      ".NET MAUI",
+      "ASP.NET Core",
+      "Blazor Server/WebAssembly",
+      "APIs RESTful",
+      "Entity Framework",
+      "SQL Server",
+      "Google Cloud Platform (GCP)",
+      "Firebase",
+      "FCM (Firebase Cloud Messaging)",
+      "XUnit",
+      "Selenium",
+      "Appium"
+    ]
+  },
+  {
+    "Title": "Analista de Desenvolvimento Pleno",
+    "Company": "Vericode",
+    "StartDate": "2021-01-01",
+    "EndDate": "2022-02-28",
+    "JobDescription": "Desenvolvimento de sistemas internos para automação de tarefas, utilizando .NET Framework WinForms, Angular, ASP.NET, Xamarin, .NET Core e SQL Server. Participação em projetos de automação de testes e migração do código legado de serviços SOAP para REST.",
+    "Technologies": [
+      ".NET Framework",
+      "WinForms",
+      "Angular",
+      "ASP.NET Core",
+      "Xamarin",
+      ".NET Core",
+      "SQL Server",
+      "MongoDB"
+    ]
+  },
+  {
+    "Title": "Analista de Desenvolvimento Jr",
+    "Company": "Vericode",
+    "StartDate": "2019-10-31",
+    "EndDate": "2020-12-31",
+    "JobDescription": "Desenvolvimento de correções para sistemas internos de automação de tarefas e testes; Suporte a usuários e validação da execução diaria das automações da ferramenta via CI/CD em dashboards automatizados. Participação da integração da execução das automações do produto desenvolvido junto ao RPA UI PATH.",
+    "Technologies": [
+      ".NET Framework",
+      "WinForms",
+      "SQL Server",
+      "XUnit",
+      "Selenium",
+      "Appium",
+      "Cucumber",
+      "Robot Framework"
+    ]
+  },
+  {
+    "Title": "Analista de Desenvolvimento Jr",
+    "Company": "Luz Digital",
+    "StartDate": "2019-06-01",
+    "EndDate": "2019-10-30",
+    "JobDescription": "Desenvolvimento de aplicações para produto de IoT produzido internamente. Utilizado .NetStarndard, Xamarin, Azure IoT Hub, Azure Functions, Azure Blob Storage",
+    "Technologies": [
+      ".NetStandard",
+      ".Net Core 2.1+",
+      "Xamarin",
+      "Azure IoT Hub",
+      "Azure Functions",
+      "Azure Blob Storage"
+    ]
+  },
+  {
+    "Title": "Analista de Desenvolvimento Jr",
+    "Company": "Handphone",
+    "StartDate": "2016-01-08",
+    "EndDate": "2018-03-08",
+    "JobDescription": "Desenvolvimento de sistemas de telefonia IP comercializados para clientes da empresa, utilizando .NET Framework, WinForms, WPF, MySQL, MariaDB, Java e Xamarin Forms. Participação em processos de suporte à usuários e pairing para deploy de releases.",
+    "Technologies": [
+      ".NET Framework",
+      "WinForms",
+      "WPF",
+      "MySQL",
+      "MariaDB",
+      "Java SE (8)",
+      "Xamarin Forms"
+    ]
+  }
+]

@@ -118,6 +118,69 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ApplicationTitle" xml:space="preserve">
-    <value>Weslley Luiz - Desenvolvedor .NET Fullstack</value>
+    <value>Weslley Luiz</value>
+  </data>
+  <data name="ContactLabel" xml:space="preserve">
+    <value>Contato</value>
+  </data>
+  <data name="ContactPageTitle" xml:space="preserve">
+    <value>Contato | Portfólio</value>
+  </data>
+  <data name="EmailMandatoryLabel" xml:space="preserve">
+    <value>O e-mail é obrigatório!</value>
+  </data>
+  <data name="HomePageCenterText" xml:space="preserve">
+    <value>Áreas de Especialidade</value>
+  </data>
+  <data name="HomePageTitle" xml:space="preserve">
+    <value>Início | Portfólio</value>
+  </data>
+  <data name="InOfficeAct" xml:space="preserve">
+    <value>Atuação Corporativa</value>
+  </data>
+  <data name="InOfficeActDescription" xml:space="preserve">
+    <value>Minha trajetória em empresas como colaborador interno.</value>
+  </data>
+  <data name="InOfficeActPageTitle" xml:space="preserve">
+    <value>Experiência Corporativa | Portfólio</value>
+  </data>
+  <data name="JobSubtitle" xml:space="preserve">
+    <value>Construindo soluções robustas para Web, Mobile e Desktop desde 2016.</value>
+  </data>
+  <data name="JobTitle" xml:space="preserve">
+    <value>Desenvolvedor .NET Full Stack</value>
+  </data>
+  <data name="NameMandatoryLabel" xml:space="preserve">
+    <value>O nome é obrigatório!</value>
+  </data>
+  <data name="NotFoundCardContent" xml:space="preserve">
+    <value>Desculpe, o conteúdo procurado não foi encontrado</value>
+  </data>
+  <data name="NotFoundCardTitle" xml:space="preserve">
+    <value>Conteúdo não encontrado.</value>
+  </data>
+  <data name="NotFoundPageTitle" xml:space="preserve">
+    <value>Não Encontrado | Portifólio</value>
+  </data>
+  <data name="ProfileLabel" xml:space="preserve">
+    <value>Gostou do meu perfil? Vamos trabalhar juntos!</value>
+  </data>
+  <data name="ProjectsPageTitle" xml:space="preserve">
+    <value>Projetos | Portifólio</value>
+  </data>
+  <data name="ProjectsSubtitle" xml:space="preserve">
+    <value>Confira algumas das soluções que desenvolvi ao longo da minha jornada.</value>
+  </data>
+  <data name="ProjectsTitle" xml:space="preserve">
+    <value>Meus Projetos</value>
+  </data>
+  <data name="SendEmail" xml:space="preserve">
+    <value>Enviar Mensagem</value>
+  </data>
+  <data name="SendWhatsApp" xml:space="preserve">
+    <value>WhatsApp</value>
+  </data>
+  <data name="WriteMessageLabel" xml:space="preserve">
+    <value>Por favor, escreva uma mensagem.</value>
   </data>
 </root>

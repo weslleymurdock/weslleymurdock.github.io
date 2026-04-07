@@ -1,0 +1,67 @@
+﻿@page "/projects"
+
+<PageTitle>@Localizer["ProjectsPageTitle"]</PageTitle>
+
+<MudContainer Class="pa-10" Style="height:100vh;">
+    <MudText Typo="Typo.h3" GutterBottom="true" Align="Align.Center">@Localizer["ProjectsTitle"]</MudText>
+    <MudText Typo="Typo.subtitle1" Align="Align.Center" Class="mb-10">@Localizer["ProjectsSubtitle"]</MudText>
+    <MudGrid>
+        @if (projects == null)
+        {
+            <div class="d-flex pa-6 mt-6 mb-6 justify-center">
+                <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+            </div>
+        }
+        else
+        {
+            @foreach (ProjectData project in projects)
+            {
+                <MudItem xs="12" md="6" lg="6">
+                    <MudCard Elevation="4" Class="glass-cmyk-bg">
+                        <MudCardHeader>
+                            <CardHeaderAvatar>
+                                <MudIcon Icon="@project.Icon" Size="Size.Large" Color="Color.Primary" />
+                            </CardHeaderAvatar>
+                            <CardHeaderContent>
+                                <MudText Typo="Typo.h5">@project.Title</MudText>
+                                <MudText Typo="Typo.caption" Color="Color.Secondary">@project.Platform</MudText>
+                                <MudText Typo="Typo.body2" Class="mt-3">@project.Description</MudText>
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                        <MudCardContent>
+                            <div class="mt-4">
+                                <MudChipSet T="MudChip<string>">
+                                    @foreach (var tech in project.Technologies)
+                                    {
+                                        <MudChip T="string" Size="Size.Small" Color="Color.Surface">@tech</MudChip>
+                                    }
+                                </MudChipSet>
+                            </div>
+                        </MudCardContent>
+                        <MudCardActions>
+                            <MudIconButton Icon="@Icons.Material.Filled.Link" Variant="Variant.Text">
+                                <MudLink Href="@project.Source" Color="Color.Primary">Ver Projeto</MudLink>
+                            </MudIconButton>
+                        </MudCardActions>
+                    </MudCard>
+                </MudItem>
+            }
+        }
+    </MudGrid>
+</MudContainer>
+@code {
+    private IList<ProjectData>? projects = [];
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender || projects?.Count <= 0)
+        {
+            projects = await Http.GetFromJsonAsync<List<ProjectData>>("data/projects.json");
+            StateHasChanged();
+        }
+    }
+    
+    private void OnFABClick()
+    {
+        // Lógica para ação do FAB, como abrir um modal ou redirecionar para um formulário de contato
+    }
+}
