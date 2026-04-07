@@ -1,0 +1,51 @@
+[
+  {
+    "title": "Web & Backend",
+    "icon": "<path d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z\"/>",
+    "chips": [
+      "C# / NET 10",
+      "ASP.NET Core",
+      "Blazor Server/Webassembly",
+      "APIs RESTful",
+      "Entity Framework",
+      "Identity Framework",
+      "Arquitetura Limpa (Clean Architecture)",
+      "Integrações de serviços de terceiros",
+      "Deploy (Azure, GCP)"
+    ]
+  },
+  {
+    "title": "Mobile Cross-Platform",
+    "icon": "<g><path d=\"M0,0h24v24H0V0z\" fill=\"none\"/></g><g><g><path d=\"M3,7h2v7H3V7z M0,10h2v7H0V10z M22,7h2v7h-2V7z M19,10h2v7h-2V10z M16,2.01L8,2C6.9,2,6,2.9,6,4v16c0,1.1,0.9,2,2,2h8 c1.1,0,2-0.9,2-2V4C18,2.9,17.1,2.01,16,2.01z M16,17H8V7h8V17z\"/></g></g>",
+    "chips": [
+      ".NET MAUI",
+      "Xamarin",
+      "WPF",
+      "WinForms",
+      "WinUI",
+      "Deploy (PlayStore/AppStore)"
+    ]
+  },
+  {
+    "title": "Devops, Testes e Database",
+    "icon": "<path d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M18 2h-8L4.02 8 4 20c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-6 6h-2V4h2v4zm3 0h-2V4h2v4zm3 0h-2V4h2v4z\"/>",
+    "chips": [
+      "NUnit",
+      "XUnit",
+      "Selenium",
+      "Appium",
+      "Cucumber",
+      "Docker",
+      "Kubernetes",
+      "Swarm",
+      "SQL Server",
+      "MySQL",
+      "MariaDB",
+      "PostgreSQL",
+      "SQLite",
+      "MongoDB",
+      "Redis",
+      "RabbitMQ"
+    ]
+  }
+]

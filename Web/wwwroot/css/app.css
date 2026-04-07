@@ -1,0 +1,154 @@
+/* =========================
+   TOKENS
+========================= */
+
+:root {
+    /* CMYK pastel vibrante */
+    --cmyk-c: #67E8F9; /* cyan */
+    --cmyk-m: #F9A8D4; /* magenta */
+    --cmyk-y: #FDE68A; /* yellow */
+    --cmyk-k: #94A3B8; /* soft black */
+    /* RGB pastel vibrante */
+    --rgb-r: #FF4F4F;
+    --rgb-g: #86EFAC;
+    --rgb-b: #93C5FD;
+
+    /* =========================
+       ANALOGOUS PALETTE (7 cores)
+    ========================= */
+
+    --color-1: #67E8F9; /* cyan base */
+    --color-2: #5EEAD4; /* cyan → teal */
+    --color-3: #86EFAC; /* green pastel */
+    --color-4: #BEF264; /* lime soft */
+    --color-5: #FDE68A; /* yellow pastel */
+    --color-6: #FBCFE8; /* pink soft */
+    --color-7: #F9A8D4; /* magenta pastel */
+    
+    --glass-bg: rgba(255,255,255,0.06);
+    --glass-border: rgba(255,255,255,0.12);
+}
+
+.mud-theme-dark {
+    /* =========================
+       CMYK (versão dark ajustada)
+    ========================= */
+
+    --cmyk-c: #22D3EE; /* mais vibrante no dark */
+    --cmyk-m: #F472B6; /* magenta mais forte */
+    --cmyk-y: #FACC15; /* amarelo mais quente */
+    --cmyk-k: #334155; /* preto mais profundo */
+    /* =========================
+       RGB (versão dark ajustada)
+    ========================= */
+
+    --rgb-r: #FF6B6B; /* menos agressivo que FF4F4F */
+    --rgb-g: #4ADE80; /* mais saturado no dark */
+    --rgb-b: #60A5FA; /* azul mais forte */
+    /* =========================
+       GLASS BASE
+    ========================= */
+
+    --glass-bg: rgba(255,255,255,0.04);
+    --glass-border: rgba(255,255,255,0.08);
+}
+
+/* =========================
+   BASE GLASS
+========================= */
+
+.glass-cmyk-bg,
+.glass-rgb-bg {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-radius: 18px;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 12px 50px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.05);
+}
+
+    /* =========================
+   AURORA BASE
+========================= */
+
+    .glass-cmyk-bg::before,
+    .glass-cmyk-bg::after,
+    .glass-rgb-bg::before,
+    .glass-rgb-bg::after {
+        content: "";
+        position: absolute;
+        inset: -75%;
+        z-index: -1;
+        filter: blur(85px);
+        opacity: 0.35;
+        background-size: 320% 320%;
+    }
+
+    /* =========================
+   CMYK GRADIENT
+========================= */
+
+    .glass-cmyk-bg::before {
+        background: radial-gradient( circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.25), transparent 55% ), linear-gradient( 120deg, var(--cmyk-c), var(--cmyk-m), var(--cmyk-y), var(--cmyk-k) );
+        animation: auroraRight 3s cubic-bezier(0.4,0,0.2,1) forwards;
+    }
+
+    .glass-cmyk-bg::after {
+        background: linear-gradient( 300deg, var(--cmyk-y), var(--cmyk-c), var(--cmyk-m), var(--cmyk-k) );
+        animation: auroraLeft 3s cubic-bezier(0.4,0,0.2,1) forwards;
+    }
+
+    /* =========================
+   RGB GRADIENT
+========================= */
+
+    .glass-rgb-bg::before {
+        background: radial-gradient( circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.25), transparent 55% ), linear-gradient( 120deg, var(--rgb-r), var(--rgb-g), var(--rgb-b) );
+        animation: auroraRight 3s cubic-bezier(0.4,0,0.2,1) forwards;
+    }
+
+    .glass-rgb-bg::after {
+        background: linear-gradient( 300deg, var(--rgb-b), var(--rgb-r), var(--rgb-g) );
+        animation: auroraLeft 3s cubic-bezier(0.4,0,0.2,1) forwards;
+    }
+
+/* =========================
+   ANIMAÇÃO
+========================= */
+
+@keyframes auroraRight {
+    0% {
+        transform: translateX(-35%) scale(1.3);
+        background-position: 0% 50%;
+    }
+
+    100% {
+        transform: translateX(0%) scale(1);
+        background-position: 50% 50%;
+    }
+}
+
+@keyframes auroraLeft {
+    0% {
+        transform: translateX(35%) scale(1.3);
+        background-position: 100% 50%;
+    }
+
+    100% {
+        transform: translateX(0%) scale(1);
+        background-position: 50% 50%;
+    }
+}
+
+/* =========================
+   CONTENT FIX
+========================= */
+
+.glass-cmyk-bg > *,
+.glass-rgb-bg > * {
+    position: relative;
+    z-index: 2;
+}
