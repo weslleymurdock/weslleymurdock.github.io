@@ -1,5 +1,5 @@
 /* =========================
-   TOKENS
+    TOKENS
 ========================= */
 
 :root {
@@ -14,7 +14,7 @@
     --rgb-b: #93C5FD;
 
     /* =========================
-       ANALOGOUS PALETTE (7 cores)
+        ANALOGOUS PALETTE (7 cores)
     ========================= */
 
     --color-1: #67E8F9; /* cyan base */
@@ -31,22 +31,22 @@
 
 .mud-theme-dark {
     /* =========================
-       CMYK (versão dark ajustada)
+        CMYK (versão dark ajustada)
     ========================= */
 
     --cmyk-c: #22D3EE; /* mais vibrante no dark */
     --cmyk-m: #F472B6; /* magenta mais forte */
-    --cmyk-y: #FACC15; /* amarelo mais quente */
+    --cmyk-y: #FCCC04; /* amarelo mais quente */
     --cmyk-k: #334155; /* preto mais profundo */
     /* =========================
-       RGB (versão dark ajustada)
+        RGB (versão dark ajustada)
     ========================= */
 
     --rgb-r: #FF6B6B; /* menos agressivo que FF4F4F */
     --rgb-g: #4ADE80; /* mais saturado no dark */
     --rgb-b: #60A5FA; /* azul mais forte */
     /* =========================
-       GLASS BASE
+        GLASS BASE
     ========================= */
 
     --glass-bg: rgba(255,255,255,0.04);
@@ -54,7 +54,7 @@
 }
 
 /* =========================
-   BASE GLASS
+    BASE GLASS
 ========================= */
 
 .glass-cmyk-bg,
@@ -63,60 +63,60 @@
     isolation: isolate;
     overflow: hidden;
     background: var(--glass-bg) !important;
-    backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
-    border-radius: 18px;
+    backdrop-filter: blur(24px) saturate(180%);
+    border-radius: 25px;
     border: 1px solid var(--glass-border);
     box-shadow: 0 12px 50px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.05);
 }
 
-    /* =========================
-   AURORA BASE
+/* =========================
+AURORA BASE
 ========================= */
 
-    .glass-cmyk-bg::before,
-    .glass-cmyk-bg::after,
-    .glass-rgb-bg::before,
-    .glass-rgb-bg::after {
-        content: "";
-        position: absolute;
-        inset: -75%;
-        z-index: -1;
-        filter: blur(85px);
-        opacity: 0.35;
-        background-size: 320% 320%;
-    }
-
-    /* =========================
-   CMYK GRADIENT
-========================= */
-
-    .glass-cmyk-bg::before {
-        background: radial-gradient( circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.25), transparent 55% ), linear-gradient( 120deg, var(--cmyk-c), var(--cmyk-m), var(--cmyk-y), var(--cmyk-k) );
-        animation: auroraRight 3s cubic-bezier(0.4,0,0.2,1) forwards;
-    }
-
-    .glass-cmyk-bg::after {
-        background: linear-gradient( 300deg, var(--cmyk-y), var(--cmyk-c), var(--cmyk-m), var(--cmyk-k) );
-        animation: auroraLeft 3s cubic-bezier(0.4,0,0.2,1) forwards;
-    }
-
-    /* =========================
-   RGB GRADIENT
-========================= */
-
-    .glass-rgb-bg::before {
-        background: radial-gradient( circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.25), transparent 55% ), linear-gradient( 120deg, var(--rgb-r), var(--rgb-g), var(--rgb-b) );
-        animation: auroraRight 3s cubic-bezier(0.4,0,0.2,1) forwards;
-    }
-
-    .glass-rgb-bg::after {
-        background: linear-gradient( 300deg, var(--rgb-b), var(--rgb-r), var(--rgb-g) );
-        animation: auroraLeft 3s cubic-bezier(0.4,0,0.2,1) forwards;
-    }
+.glass-cmyk-bg::before,
+.glass-cmyk-bg::after,
+.glass-rgb-bg::before,
+.glass-rgb-bg::after {
+    content: "";
+    position: absolute;
+    inset: -75%;
+    z-index: -1;
+    filter: blur(85px);
+    opacity: 0.35;
+    background-size: 320% 320%;
+}
 
 /* =========================
-   ANIMAÇÃO
+CMYK GRADIENT
+========================= */
+
+.glass-cmyk-bg::before {
+    background: radial-gradient( circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.25), transparent 75% ), linear-gradient( 120deg, var(--cmyk-c), var(--cmyk-m), var(--cmyk-y), var(--cmyk-k) );
+    animation: auroraRight 3s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+
+.glass-cmyk-bg::after {
+    background: linear-gradient( 300deg, var(--cmyk-y), var(--cmyk-c), var(--cmyk-m), var(--cmyk-k) );
+    animation: auroraLeft 3s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+
+/* =========================
+RGB GRADIENT
+========================= */
+
+.glass-rgb-bg::before {
+    background: radial-gradient( circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.25), transparent 55% ), linear-gradient( 120deg, var(--rgb-r), var(--rgb-g), var(--rgb-b) );
+    animation: auroraRight 3s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+
+.glass-rgb-bg::after {
+    background: linear-gradient( 300deg, var(--rgb-b), var(--rgb-r), var(--rgb-g) );
+    animation: auroraLeft 3s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+
+/* =========================
+    ANIMAÇÃO
 ========================= */
 
 @keyframes auroraRight {
@@ -144,7 +144,7 @@
 }
 
 /* =========================
-   CONTENT FIX
+    CONTENT FIX
 ========================= */
 
 .glass-cmyk-bg > *,
@@ -152,3 +152,42 @@
     position: relative;
     z-index: 2;
 }
+
+.mud-paper.glass-cmyk-bg
+{
+    background-color: var(--cmyk-m)!important;
+    color: var(--mud-palette-info-lighten)!important;
+} 
+
+.mud-paper.glass-rgb-bg
+{
+    background-color: var(--rgb-r) !important;
+    color: var(--mud-palette-info-darken)!important;
+}
+
+.mud-paper.glass-cmyk-bg, 
+.mud-paper.glass-rgb-bg{
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+
+/*
+ * GENERICS
+ */
+ .rb-cy-gradient{
+    background: radial-gradient( circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.25), transparent 25% ), linear-gradient( 180deg, var(--rgb-b), var(--cmyk-y));
+    color: var(--mud-palette-dark);
+ }
+
+ .mps-cy-gradient {
+    background: radial-gradient( circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.25), transparent 25% ), linear-gradient( 180deg, var(--rgb-r), var(--cmyk-y));
+    color: var(--mud-palette-dark); 
+    font-weight: 600;
+ }
+
+ .rb-rr-gradient {
+    background: radial-gradient( circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.25), transparent 25% ), linear-gradient( 180deg,  var(--rgb-b), var(--rgb-r)); 
+    color: var(--mud-palette-dark);
+    font-weight: 600;
+ }

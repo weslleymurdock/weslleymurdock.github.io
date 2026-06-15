@@ -6,7 +6,7 @@ public static class CultureInfoExtensions
     extension(CultureInfo ci)
     {
 
-        public void SetCurrentCulture(string userCulture)
+        internal void SetCurrentCulture(string userCulture)
         {
             var defaultCulture = SupportedCultures[0];
             userCulture ??= CultureInfo.CurrentUICulture.Name;

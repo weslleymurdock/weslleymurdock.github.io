@@ -7,13 +7,13 @@ public interface IBrowserSettingsService
     /// Retrieves the current theme saved in browser settings
     /// </summary>
     /// <returns>a string representing the theme: e.g. : 'light', 'dark'</returns>
-    Task<string> GetThemesAsync(bool hard = false);
+    Task<string> GetCurrentThemeAsync(bool hard = false);
 
     /// <summary>
     /// Retrieves the language stored in browser settings
     /// </summary>
     /// <returns>string representing language of pages</returns>
-    Task<string> GetUserCultureAsync(bool hard = false);
+    Task<string> GetCurrentLanguageAsync(bool hard = false);
 
     /// <summary>
     /// Init the settings searching

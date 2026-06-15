@@ -1,7 +1,8 @@
 using Microsoft.JSInterop;
 
 namespace Web.Infrastructure.Services.Concrete;
-public class BrowserSettingsService(IJSRuntime js) : IBrowserSettingsService
+
+public sealed class BrowserSettingsService(IJSRuntime js) : IBrowserSettingsService
 {
     private const string StorageKey = "wm_user_settings";
 
@@ -9,7 +10,7 @@ public class BrowserSettingsService(IJSRuntime js) : IBrowserSettingsService
 
     public event Action? OnSettingsChanged;
 
-    public async Task<string> GetUserCultureAsync(bool hard = false)
+    public async Task<string> GetCurrentLanguageAsync(bool hard = false)
     {
         if (hard)
         {
@@ -18,7 +19,7 @@ public class BrowserSettingsService(IJSRuntime js) : IBrowserSettingsService
         return Settings.Language ?? string.Empty;
     }
 
-    public async Task<string> GetThemesAsync(bool hard = false)
+    public async Task<string> GetCurrentThemeAsync(bool hard = false)
     {
         if (hard)
         {
@@ -30,7 +31,7 @@ public class BrowserSettingsService(IJSRuntime js) : IBrowserSettingsService
     private async Task ReadAsync()
     {
         var json = await js.InvokeAsync<string?>("localStorage.getItem", StorageKey);
-        
+
         if (!string.IsNullOrEmpty(json))
         {
             try
@@ -64,14 +65,14 @@ public class BrowserSettingsService(IJSRuntime js) : IBrowserSettingsService
             try
             {
                 browserLang = await js.InvokeAsync<string?>("eval", "navigator.language || navigator.userLanguage");
-                
+
                 if (!string.IsNullOrWhiteSpace(browserLang))
                 {
                     var culture = CultureInfo.GetCultureInfo(browserLang.Trim());
                     Settings.Language = culture.Name; // Salva o nome padronizado (ex: "pt-BR" ou "en-US")
                 }
             }
-            catch (CultureNotFoundException)
+            catch (CultureNotFoundException cnf)
             {
                 if (browserLang != null && browserLang.Length >= 2)
                 {
@@ -81,20 +82,25 @@ public class BrowserSettingsService(IJSRuntime js) : IBrowserSettingsService
                         var culture = CultureInfo.GetCultureInfo(shortLang);
                         Settings.Language = culture.Name;
                     }
-                    catch
+                    catch (Exception ex)
                     {
+                        Console.Error.WriteLine(ex);
                         Settings.Language = "pt-BR"; // Fallback se falhar novamente
+                        throw;
                     }
                 }
                 else
                 {
+                    Console.Error.WriteLine(cnf);
                     Settings.Language = "pt-BR"; // Fallback padrão caso a string seja curta/inválida
+                    throw;
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 // Fallback de segurança para qualquer outro erro de interoperabilidade JS
-                Settings.Language = "pt-BR"; 
+                Console.Error.WriteLine(ex);
+                Settings.Language = "pt-BR";
             }
         }
     }

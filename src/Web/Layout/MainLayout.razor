@@ -1,4 +1,5 @@
-﻿@inherits LayoutComponentBase
+﻿@using Web.Theme
+@inherits LayoutComponentBase
 
 @inject Application.Services.Abstract.IBrowserSettingsService SettingsService
 
@@ -10,25 +11,12 @@
 <MudDialogProvider />
 <MudSnackbarProvider />
 
-<MudLayout Style="background: radial-gradient( circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.25), transparent 55% ), linear-gradient( 120deg, var(--rgb-b), var(--cmyk-y)); color: var(--mud-palette-dark); ">
-    <MudAppBar Elevation="1" Style="background: radial-gradient( circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.25), transparent 55% ), linear-gradient( 120deg, var(--rgb-b), var(--cmyk-y)); color: var(--mud-palette-dark); ">
-        <MudIconButton Icon="@(_drawerOpen ? Icons.Material.Filled.MenuOpen : Icons.Material.Filled.Menu)" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-        <MudText Typo="Typo.h3" Class="ml-2">@Localizer["ApplicationTitle"]</MudText>
-        <MudSpacer /> 
-        <MudIconButton Icon="@(_isDarkMode ? Icons.Material.Filled.LightMode : Icons.Material.Filled.DarkMode)" 
-                       Color="Color.Inherit" 
-                       OnClick="ToggleThemeAsync" />
- 
-        <MudMenu Icon="@Icons.Material.Filled.Language" Color="Color.Inherit" Dense="true">
-            <MudMenuItem OnClick='() => ChangeLanguageAsync("pt-BR")'>Português</MudMenuItem>
-            <MudMenuItem OnClick='() => ChangeLanguageAsync("en-US")'>English</MudMenuItem>
-        </MudMenu>
-        <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
-    </MudAppBar>
-    <MudDrawer Style="background: radial-gradient( circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.25), transparent 55% ), linear-gradient( 120deg, var(--rgb-b), var(--cmyk-y)); color: var(--mud-palette-dark); " @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
+<MudLayout Class="rb-cy-gradient">
+    <AppBar Open="@_drawerOpen" IsDark="@_isDarkMode" Language="@_language" />
+    <MudDrawer Class="rb-cy-gradient" @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
         <NavMenu />
     </MudDrawer>
-    <MudMainContent Style="background: radial-gradient( circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.25), transparent 55% ), linear-gradient( 120deg, var(--rgb-b), var(--cmyk-y)); color: var(--mud-palette-dark); ">
+    <MudMainContent Class="rb-cy-gradient">
         @Body
     </MudMainContent>
 </MudLayout>
@@ -38,6 +26,7 @@
     private bool _drawerOpen = true;
     private MudThemeProvider _mudThemeProvider = default!;
     private MudTheme _customTheme = new MudTheme(); 
+    private string _language;
     private bool _isDarkMode;
     private void DrawerToggle()
     {
@@ -55,9 +44,10 @@
     private void ApplySettings()
     {
         _isDarkMode = SettingsService.Settings.Theme == "dark";
-        
-        var culture = new CultureInfo(SettingsService.Settings.Language ?? "pt-BR");
-        culture.SetCurrentCulture(SettingsService.Settings.Language ?? "pt-BR");
+        _customTheme = _isDarkMode ? AppTheme.RgbTheme : AppTheme.CmykTheme;
+        _language = SettingsService.Settings.Language ??= "pt-BR";
+        CultureInfo culture = new (_language);
+        culture.SetCurrentCulture(_language);
     }
 
     private async Task ToggleThemeAsync()

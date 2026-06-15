@@ -13,7 +13,7 @@ var app = builder.Build();
 var sp = app.Services.CreateScope();
 var bs = sp.ServiceProvider.GetRequiredService<IBrowserSettingsService>();
 await bs.InitializeAsync();
-var userCulture = await bs.GetUserCultureAsync();
+var userCulture = await bs.GetCurrentLanguageAsync();
 
 CultureInfo ci = new(userCulture);
 ci.SetCurrentCulture(userCulture);
