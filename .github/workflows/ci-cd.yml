@@ -52,5 +52,5 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: release/wwwroot 
-          branch: gh-pages 
+          branch: pages 
           clean: true 
