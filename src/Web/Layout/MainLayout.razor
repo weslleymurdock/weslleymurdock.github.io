@@ -1,14 +1,28 @@
 ﻿@inherits LayoutComponentBase
-<MudThemeProvider Theme="@Theme.AppTheme.Default" />
+
+@inject Application.Services.Abstract.IBrowserSettingsService SettingsService
+
+@implements IDisposable
+
+
+<MudThemeProvider @ref="@_mudThemeProvider" @bind-IsDarkMode="@_isDarkMode" Theme="_customTheme" />
+<MudPopoverProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
-<MudPopoverProvider />
 
 <MudLayout Style="background: radial-gradient( circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.25), transparent 55% ), linear-gradient( 120deg, var(--rgb-b), var(--cmyk-y)); color: var(--mud-palette-dark); ">
     <MudAppBar Elevation="1" Style="background: radial-gradient( circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.25), transparent 55% ), linear-gradient( 120deg, var(--rgb-b), var(--cmyk-y)); color: var(--mud-palette-dark); ">
         <MudIconButton Icon="@(_drawerOpen ? Icons.Material.Filled.MenuOpen : Icons.Material.Filled.Menu)" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
         <MudText Typo="Typo.h3" Class="ml-2">@Localizer["ApplicationTitle"]</MudText>
-        <MudSpacer />
+        <MudSpacer /> 
+        <MudIconButton Icon="@(_isDarkMode ? Icons.Material.Filled.LightMode : Icons.Material.Filled.DarkMode)" 
+                       Color="Color.Inherit" 
+                       OnClick="ToggleThemeAsync" />
+ 
+        <MudMenu Icon="@Icons.Material.Filled.Language" Color="Color.Inherit" Dense="true">
+            <MudMenuItem OnClick='() => ChangeLanguageAsync("pt-BR")'>Português</MudMenuItem>
+            <MudMenuItem OnClick='() => ChangeLanguageAsync("en-US")'>English</MudMenuItem>
+        </MudMenu>
         <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
     </MudAppBar>
     <MudDrawer Style="background: radial-gradient( circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.25), transparent 55% ), linear-gradient( 120deg, var(--rgb-b), var(--cmyk-y)); color: var(--mud-palette-dark); " @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
@@ -21,10 +35,52 @@
 
 
 @code {
-    bool _drawerOpen = true;
-
-    void DrawerToggle()
+    private bool _drawerOpen = true;
+    private MudThemeProvider _mudThemeProvider = default!;
+    private MudTheme _customTheme = new MudTheme(); 
+    private bool _isDarkMode;
+    private void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
+    }
+    protected override async Task OnInitializedAsync()
+    { 
+        SettingsService.OnSettingsChanged += OnSettingsChanged;
+        
+        await SettingsService.InitializeAsync();
+        
+        ApplySettings();
+    }
+
+    private void ApplySettings()
+    {
+        _isDarkMode = SettingsService.Settings.Theme == "dark";
+        
+        var culture = new CultureInfo(SettingsService.Settings.Language ?? "pt-BR");
+        culture.SetCurrentCulture(SettingsService.Settings.Language ?? "pt-BR");
+    }
+
+    private async Task ToggleThemeAsync()
+    {
+        var newTheme = _isDarkMode ? "light" : "dark";
+        await SettingsService.UpdateThemeAsync(newTheme);
+    }
+
+    private async Task ChangeLanguageAsync(string lang)
+    {
+        await SettingsService.UpdateLanguageAsync(lang);
+        // Dependendo de como estruturar o i18n, pode ser necessário dar um StateHasChanged ou NavigationManager.NavigateTo(..., forceLoad: true)
+        StateHasChanged();
+    }
+
+    private void OnSettingsChanged()
+    {
+        ApplySettings();
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        SettingsService.OnSettingsChanged -= OnSettingsChanged;
     }
 }
