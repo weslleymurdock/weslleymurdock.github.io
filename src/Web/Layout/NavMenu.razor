@@ -1,16 +1,16 @@
 ﻿ 
 <MudNavMenu>
     <MudList T="MudNavLink">
-        <MudNavLink Icon="@Icons.Material.Filled.Home" Href="/" Match="NavLinkMatch.All">Home</MudNavLink>
+        <MudNavLink Icon="@Icons.Material.Filled.Home" IconColor="Color.Default" Href="/" Match="NavLinkMatch.All"><MudText Color="Color.Default">Home</MudText></MudNavLink>
         <MudDivider DividerType="DividerType.FullWidth" />
-        <MudNavLink Icon="@Icons.Material.Filled.Apps" Href="/projects" Match="NavLinkMatch.Prefix">Projects</MudNavLink>
+        <MudNavLink Icon="@Icons.Material.Filled.Apps" IconColor="Color.Default" Href="/projects" Match="NavLinkMatch.Prefix"><MudText Color="Color.Default">Projects</MudText></MudNavLink>
         <MudDivider DividerType="DividerType.FullWidth" />
-        <MudNavGroup Icon="@Icons.Material.Filled.WorkHistory" IconColor="Color.Primary" Title="Work Experience" Expanded="true">
-            <MudNavLink Href="/in-office" Icon="@Icons.Material.Filled.WorkHistory" Match="NavLinkMatch.Prefix">In-office</MudNavLink>
+        <MudNavGroup Icon="@Icons.Material.Filled.WorkHistory" IconColor="Color.Default" Title="Work Experience" Expanded="true">
+            <MudNavLink Href="/in-office" IconColor="Color.Default" Icon="@Icons.Material.Filled.WorkHistory" Match="NavLinkMatch.Prefix"><MudText Color=Color.Default>In-office</MudText></MudNavLink>
             <MudDivider DividerType="DividerType.Middle" />
-            <MudNavLink Href="/freelancer" Icon="@Icons.Material.Filled.FreeCancellation" Match="NavLinkMatch.Prefix">Freelancer</MudNavLink>
+            <MudNavLink Href="/freelancer" IconColor="Color.Default" Icon="@Icons.Material.Filled.FreeCancellation" Match="NavLinkMatch.Prefix"><MudText Color=Color.Default>Freelancer</MudText></MudNavLink>
         </MudNavGroup>
         <MudDivider DividerType="DividerType.FullWidth" />
-        <MudNavLink Icon="@Icons.Material.Filled.Person" Href="/contact" Match="NavLinkMatch.Prefix">Contact</MudNavLink>
+        <MudNavLink IconColor="Color.Default" Icon="@Icons.Material.Filled.Person" Href="/contact" Match="NavLinkMatch.Prefix"><MudText Color=Color.Default>Contact</MudText></MudNavLink>
     </MudList>
 </MudNavMenu> 

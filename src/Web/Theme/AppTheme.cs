@@ -1,10 +1,13 @@
-﻿using MudBlazor;
-namespace Web.Theme;
+﻿namespace Web.Theme;
 
 using MudBlazor;
-public class AppTheme
+
+public static class AppTheme
 {
-    public static MudTheme Default => new()
+    // ==========================================
+    // TEMA 1: CMYK BASE
+    // ==========================================
+    public static MudTheme CmykTheme => new()
     { 
         PaletteLight = new PaletteLight()
         {
@@ -129,6 +132,138 @@ public class AppTheme
         LayoutProperties = new LayoutProperties()
         {
             DefaultBorderRadius = "14px"
+        }
+    };
+
+    // ==========================================
+    // TEMA 2: RGB BASE
+    // ==========================================
+    public static MudTheme RgbTheme => new()
+    { 
+        PaletteLight = new PaletteLight()
+        {
+            // Inversão base das cores focando no padrão RGB enviado
+            Primary = "#FF4F4F",          // rgb-r
+            PrimaryLighten = "#FCA5A5",
+            PrimaryDarken = "#FF6B6B",
+            PrimaryContrastText = "#FFFFFF",
+
+            Secondary = "#86EFAC",        // rgb-g
+            SecondaryLighten = "#BBF7D0",
+            SecondaryDarken = "#4ADE80",
+            SecondaryContrastText = "#022c22",
+
+            Tertiary = "#93C5FD",         // rgb-b
+            TertiaryLighten = "#BFDBFE",
+            TertiaryDarken = "#60A5FA",
+            TertiaryContrastText = "#0f172a",
+
+            Background = "#0f172a",
+            BackgroundGray = "#1e293b",
+            Surface = "rgba(255,255,255,0.05)",
+
+            AppbarBackground = "#0f172a",
+            AppbarText = "#E5E7EB",
+
+            DrawerBackground = "#020617",
+            DrawerText = "#E5E7EB",
+            DrawerIcon = "#94A3B8",
+
+            TextPrimary = "#E5E7EB",
+            TextSecondary = "#94A3B8",
+            TextDisabled = "#64748B",
+
+            Success = "#86EFAC",          
+            SuccessLighten = "#BBF7D0",
+            SuccessDarken = "#4ADE80",
+            SuccessContrastText = "#022c22",
+
+            Warning = "#FDE68A",          
+            WarningLighten = "#FEF3C7",
+            WarningDarken = "#FACC15",
+            WarningContrastText = "#422006",
+
+            Error = "#FF4F4F",
+            ErrorLighten = "#FCA5A5",
+            ErrorDarken = "#EF4444",
+            ErrorContrastText = "#450a0a",
+
+            Info = "#93C5FD",
+            InfoLighten = "#BFDBFE",
+            InfoDarken = "#60A5FA",
+            InfoContrastText = "#0f172a",
+
+            Divider = "rgba(148,163,184,0.2)",
+            DividerLight = "rgba(148,163,184,0.1)",
+
+            TableStriped = "rgba(255,255,255,0.02)",
+            TableHover = "rgba(147,197,253,0.08)",
+            TableLines = "rgba(148,163,184,0.2)",
+
+            ActionDefault = "#CBD5F5",
+            ActionDisabled = "#475569",
+            ActionDisabledBackground = "rgba(255,255,255,0.05)",
+
+            HoverOpacity = 0.06,
+            RippleOpacity = 0.1,
+            RippleOpacitySecondary = 0.08,
+            BorderOpacity = 0.12,
+
+            Black = "#000000",
+            White = "#FFFFFF",
+
+            Dark = "#020617",
+            DarkLighten = "#1e293b",
+            DarkDarken = "#020617",
+            DarkContrastText = "#E5E7EB"
+        },
+
+        PaletteDark = new PaletteDark()
+        {
+            Primary = "#FF6B6B",          // rgb-r dark
+            Secondary = "#4ADE80",        // rgb-g dark
+            Tertiary = "#60A5FA",         // rgb-b dark
+
+            Background = "#020617",
+            BackgroundGray = "#0f172a",
+            Surface = "rgba(255,255,255,0.05)",
+
+            AppbarBackground = "#020617",
+            AppbarText = "#F9FAFB",
+
+            TextPrimary = "#F9FAFB",
+            TextSecondary = "#CBD5F5",
+            TextDisabled = "#64748B",
+
+            Success = "#4ADE80",
+            Warning = "#FACC15",
+            Error = "#F87171",
+            Info = "#60A5FA",
+
+            Divider = "rgba(148,163,184,0.2)",
+            DividerLight = "rgba(148,163,184,0.1)",
+
+            ActionDefault = "#CBD5F5",
+            ActionDisabled = "#475569",
+            ActionDisabledBackground = "rgba(255,255,255,0.05)",
+
+            HoverOpacity = 0.08,
+            RippleOpacity = 0.1,
+            RippleOpacitySecondary = 0.08,
+            BorderOpacity = 0.12,
+
+            Black = "#000000",
+            White = "#FFFFFF",
+
+            Dark = "#020617",
+            DarkLighten = "#1e293b",
+            DarkDarken = "#020617",
+            DarkContrastText = "#F9FAFB"
+        },
+
+        LayoutProperties = new LayoutProperties()
+        {
+            DefaultBorderRadius = "28px"
         }
     };
 }
