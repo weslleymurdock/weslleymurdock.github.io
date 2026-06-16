@@ -6,38 +6,38 @@
 <PageTitle>Freelancer | Portfólio</PageTitle>
 
 <MudContainer Class="pa-10" Style="height:100vh;">
-    <MudText Typo="Typo.h3" GutterBottom="true" Align="Align.Center">Trabalho Autônomo & Consultoria</MudText>
-    <MudText Typo="Typo.subtitle1" Align="Align.Center" Class="mb-10">Desenvolvimento de soluções sob medida para clientes finais e empresas parceiras.</MudText>
+    <MudText Color=Color.Tertiary Typo="Typo.h3" GutterBottom="true" Align="Align.Center">Trabalho Autônomo & Consultoria</MudText>
+    <MudText Color=Color.Tertiary Typo="Typo.subtitle1" Align="Align.Center" Class="mb-10">Desenvolvimento de soluções sob medida para clientes finais e empresas parceiras.</MudText>
 
     <MudGrid>
         <MudItem xs="12" md="6">
-            <MudCard Class=@(_theme == "dark" ? "glass-rgb-bg" : "glass-cmyk-bg") Elevation="2">
-                <MudCardHeader>
+            <MudCard Elevation="2">
+                <MudCardHeader Class="glass-royal-bg">
                     <CardHeaderAvatar>
                         <MudIcon Icon="@Icons.Material.Filled.Architecture" Color="Color.Tertiary" Size="Size.Large" />
                     </CardHeaderAvatar>
                     <CardHeaderContent>
-                        <MudText Typo="Typo.h6">Arquitetura e Desenho de Soluções</MudText>
+                        <MudText Color=Color.Primary Typo="Typo.h6">Arquitetura e Desenho de Soluções</MudText>
                     </CardHeaderContent>
                 </MudCardHeader>
                 <MudCardContent>
-                    <MudText Typo="Typo.body2">Auxilio clientes a tirarem suas ideias do papel de forma técnica, escolhendo a melhor infraestrutura, banco de dados e arquitetura de software para garantir que o projeto escale.</MudText>
+                    <MudText Color=Color.Primary Typo="Typo.body2">Auxilio clientes a tirarem suas ideias do papel de forma técnica, escolhendo a melhor infraestrutura, banco de dados e arquitetura de software para garantir que o projeto escale.</MudText>
                 </MudCardContent>
             </MudCard>
         </MudItem>
 
         <MudItem xs="12" md="6">
-            <MudCard Class="@(_theme == "dark" ? "glass-rgb-bg" : "glass-cmyk-bg")" Elevation="2">
-                <MudCardHeader>
+            <MudCard Elevation="2">
+                <MudCardHeader Class="glass-royal-bg">
                     <CardHeaderAvatar>
                         <MudIcon Icon="@Icons.Material.Filled.Speed" Color="Color.Secondary" Size="Size.Large" />
                     </CardHeaderAvatar>
                     <CardHeaderContent>
-                        <MudText Typo="Typo.h6">Otimização e Resolução de Gargalos</MudText>
+                        <MudText Color=Color.Primary Typo="Typo.h6">Otimização e Resolução de Gargalos</MudText>
                     </CardHeaderContent>
                 </MudCardHeader>
                 <MudCardContent>
-                    <MudText Typo="Typo.body2">Análise de código-fonte de sistemas lentos em produção e reescrita de gargalos em .NET para trazer performance máxima e diminuir custos de nuvem.</MudText>
+                    <MudText Color=Color.Primary Typo="Typo.body2">Análise de código-fonte de sistemas lentos em produção e reescrita de gargalos em .NET para trazer performance máxima e diminuir custos de nuvem.</MudText>
                 </MudCardContent>
             </MudCard>
         </MudItem>

@@ -11,12 +11,12 @@
 <MudDialogProvider />
 <MudSnackbarProvider />
 
-<MudLayout Class="rb-cy-gradient">
+<MudLayout Class="rp-ap-gradient">
     <AppBar Open="@_drawerOpen" IsDark="@_isDarkMode" Language="@_language" />
-    <MudDrawer Class="rb-cy-gradient" @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
+    <MudDrawer Class="rp-ap-gradient" @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
         <NavMenu />
     </MudDrawer>
-    <MudMainContent Class="rb-cy-gradient">
+    <MudMainContent Class="rp-ap-gradient">
         @Body
     </MudMainContent>
 </MudLayout>
@@ -25,7 +25,7 @@
 @code {
     private bool _drawerOpen = true;
     private MudThemeProvider _mudThemeProvider = default!;
-    private MudTheme _customTheme = new MudTheme(); 
+    private MudTheme _customTheme = new MudTheme();
     private string _language;
     private bool _isDarkMode;
     private void DrawerToggle()
@@ -33,33 +33,39 @@
         _drawerOpen = !_drawerOpen;
     }
     protected override async Task OnInitializedAsync()
-    { 
+    {
         SettingsService.OnSettingsChanged += OnSettingsChanged;
-        
+
         await SettingsService.InitializeAsync();
-        
+
         ApplySettings();
     }
 
     private void ApplySettings()
     {
         _isDarkMode = SettingsService.Settings.Theme == "dark";
-        _customTheme = _isDarkMode ? AppTheme.RgbTheme : AppTheme.CmykTheme;
+        _customTheme = _isDarkMode ? AppTheme.RoyalBlueTheme : AppTheme.SkyBlueTheme;
         _language = SettingsService.Settings.Language ??= "pt-BR";
-        CultureInfo culture = new (_language);
+        CultureInfo culture = new(_language);
         culture.SetCurrentCulture(_language);
     }
 
     private async Task ToggleThemeAsync()
     {
         var newTheme = _isDarkMode ? "light" : "dark";
+        _customTheme = _isDarkMode ? AppTheme.RoyalBlueTheme : AppTheme.SkyBlueTheme;
         await SettingsService.UpdateThemeAsync(newTheme);
+    }
+
+    private async Task ToggleLanguageAsync()
+    {
+        var culture = new CultureInfo(_language);
+        culture.SetCurrentCulture(_language);
     }
 
     private async Task ChangeLanguageAsync(string lang)
     {
         await SettingsService.UpdateLanguageAsync(lang);
-        // Dependendo de como estruturar o i18n, pode ser necessário dar um StateHasChanged ou NavigationManager.NavigateTo(..., forceLoad: true)
         StateHasChanged();
     }
 

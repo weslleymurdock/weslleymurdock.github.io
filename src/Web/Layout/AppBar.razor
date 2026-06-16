@@ -1,41 +1,36 @@
 @inject Application.Services.Abstract.IBrowserSettingsService SettingsService
 @inject IAppLocalizer Localizer
-
 @implements IDisposable
 
 
-<MudAppBar Elevation="1" Class="rb-cy-gradient">
-    <MudIconButton Icon="@(Open ? Icons.Material.Filled.MenuOpen : Icons.Material.Filled.Menu)" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+<MudAppBar Elevation="1" Class="rp-ap-gradient">
+    <MudIconButton Icon="@(Open ? Icons.Material.Filled.MenuOpen : Icons.Material.Filled.Menu)" Color=Color.Inherit Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
     <MudText Typo="Typo.h3" Class="ml-2">@Localizer["ApplicationTitle"]</MudText>
     <MudSpacer /> 
     <MudIconButton Icon="@(IsDark ? Icons.Material.Filled.LightMode : Icons.Material.Filled.DarkMode)" 
-                    Color="Color.Inherit" 
+                    Color=Color.Inherit 
                     OnClick="OnToggleAsync" />
 
-    <MudMenu Icon="@Icons.Material.Filled.Language" Color="Color.Inherit" Dense="true">
-        <MudMenuItem OnClick='() => OnMenuItemClick("pt-BR")'>Português</MudMenuItem>
-        <MudMenuItem OnClick='() => OnMenuItemClick("en-US")'>English</MudMenuItem>
+    <MudMenu Icon="@Icons.Material.Filled.Language" Color=Color.Inherit Dense="true">
+        <MudMenuItem OnClick='() => OnMenuItemClickAsync("pt-BR")'>Português</MudMenuItem>
+        <MudMenuItem OnClick='() => OnMenuItemClickAsync("en-US")'>English</MudMenuItem>
     </MudMenu>
-
-    <LanguagesMenu Language="@Language" />
-    <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
+     
+    <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color=Color.Inherit Edge="Edge.End" />
 </MudAppBar>
 
 @code {
     [Parameter] public bool Open { get; set; } = false;
     [Parameter] public bool IsDark { get; set; } = false;
     [Parameter] public string Language { get; set; } = string.Empty;
-    private void SettingsChanged()
+    [Parameter] public System.Action? LanguageToggled { get;set; } 
+    
+    private async Task OnMenuItemClickAsync(string language)
     {
-        CultureInfo ci = new CultureInfo(Language);
-        ci.SetCurrentCulture(Language);
+        Language = language ??= "pt-BR";
+        await ChangeLanguageAsync(language);
+    }
 
-        StateHasChanged();
-    }
-    private void OnMenuItemClick(string language)
-    {
-        Language ??= "pt-BR";
-    }
     protected override async Task OnInitializedAsync()
     {
         await SettingsService.InitializeAsync();
@@ -51,12 +46,10 @@
         ApplySettings();
         StateHasChanged();
     }
-     private void ApplySettings()
+
+    private void ApplySettings()
     {
         IsDark = SettingsService.Settings.Theme == "dark";
-        Language = SettingsService.Settings.Language ??= "pt-BR";
-        CultureInfo culture = new (Language);
-        culture.SetCurrentCulture(Language);
     }
 
     protected async Task OnToggleAsync()
@@ -67,8 +60,10 @@
 
     private async Task ChangeLanguageAsync(string lang)
     {
+        CultureInfo ci = new CultureInfo(Language);
+        ci.SetCurrentCulture(Language);
+
         await SettingsService.UpdateLanguageAsync(lang);
-        // Dependendo de como estruturar o i18n, pode ser necessário dar um StateHasChanged ou NavigationManager.NavigateTo(..., forceLoad: true)
         StateHasChanged();
     }
 

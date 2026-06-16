@@ -1,5 +1,10 @@
 <Solution>
     <Folder Name="/src/">
         <Project Path="src/Web/Web.csproj" />
+    </Folder>
+    <Folder Name="/tests/">
+        <Project Path="tests/Web.E2ETests/Web.E2ETests.csproj" Id="8cf8d111-5819-4a88-b9f2-e06e4b7731d1" />
+        <Project Path="tests/Web.UITests/Web.UITests.csproj" />
+        <Project Path="tests/Web.UnitTests/Web.UnitTests.csproj" />
     </Folder> 
 </Solution>

@@ -1,10 +1,12 @@
 ﻿@page "/projects"
+@implements IDisposable
+@inject IBrowserSettingsService SettingsService
 
 <PageTitle>@Localizer["ProjectsPageTitle"]</PageTitle>
 
 <MudContainer Class="pa-10" Style="height:100vh;">
-    <MudText Typo="Typo.h3" GutterBottom="true" Align="Align.Center">@Localizer["ProjectsTitle"]</MudText>
-    <MudText Typo="Typo.subtitle1" Align="Align.Center" Class="mb-10">@Localizer["ProjectsSubtitle"]</MudText>
+    <MudText Color=Color.Tertiary Typo="Typo.h3" GutterBottom="true" Align="Align.Center">@Localizer["ProjectsTitle"]</MudText>
+    <MudText Color=Color.Tertiary Typo="Typo.subtitle1" Align="Align.Center" Class="mb-10">@Localizer["ProjectsSubtitle"]</MudText>
     <MudGrid>
         @if (projects == null)
         {
@@ -18,7 +20,7 @@
             {
                 <MudItem xs="12" md="6" lg="6">
                     <MudCard Elevation="4" >
-                        <MudCardHeader Class="glass-cmyk-bg">
+                        <MudCardHeader Class=""glass-royal-bg"">
                             <CardHeaderAvatar>
                                 <MudIcon Icon="@project.Icon" Size="Size.Large" Color="Color.Secondary" />
                             </CardHeaderAvatar>
@@ -48,14 +50,40 @@
     </MudGrid>
 </MudContainer>
 @code {
+    private string _theme = "light";
+    private string _language = "pt-br";
     private IList<ProjectData>? projects = [];
+
+    protected override async  Task OnInitializedAsync()
+    {
+        SettingsService.OnSettingsChanged += SettingsChanged;
+        await SettingsService.InitializeAsync();
+        base.OnInitializedAsync();
+    }
+
+    private void SettingsChanged()
+    {
+        Task.Run(async() => await ApplySettings());
+        StateHasChanged();
+    }
+
+    private async Task ApplySettings()
+    {
+        _theme = await SettingsService.GetCurrentThemeAsync();
+        _language = await SettingsService.GetCurrentLanguageAsync();
+    }
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender || projects?.Count <= 0)
         {
             projects = await Http.GetFromJsonAsync<List<ProjectData>>("data/projects.json");
+            ApplySettings();
             StateHasChanged();
         }
     }
-     
+    public void Dispose()
+    {
+       SettingsService.OnSettingsChanged -= SettingsChanged;
+    }
 }

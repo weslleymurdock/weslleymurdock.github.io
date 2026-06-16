@@ -8,8 +8,8 @@
 
 <MudContainer Class="mt-10 pa-10">
     <div class="text-center mb-10">
-        <MudText Typo="Typo.h2" Color="Color.Inherit" Align="Align.Center" Style="font-weight: 800;">@Localizer["JobTitle"]</MudText>
-        <MudText Typo="Typo.h5" Color="Color.Inherit" Align="Align.Center" Class="mt-2">@Localizer["JobSubtitle"]</MudText>
+        <MudText Typo="Typo.h2" Color=Color.Tertiary Align="Align.Center" Style="font-weight: 800;">@Localizer["JobTitle"]</MudText>
+        <MudText Typo="Typo.h5" Color=Color.Tertiary Align="Align.Center" Class="mt-2">@Localizer["JobSubtitle"]</MudText>
     </div>
 
     <MudText Typo="Typo.h4" Align="Align.Center" GutterBottom="true" Class="mt-12 mb-6">@Localizer["HomePageCenterText"]</MudText>
@@ -17,41 +17,37 @@
     @if (cards == null)
     {
         <div class="d-flex pa-6 mt-6 mb-6 justify-center">
-            <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+            <MudProgressCircular Color=Color.Tertiary Indeterminate="true" />
         </div>
     }
     else
     {
-        <MudCarousel TData="FeatureCard" EnableSwipeGesture="true" AutoCycleTime="@TimeSpan.FromSeconds(5)" AutoCycle="true" ShowArrows="true" ShowBullets="true" Style="height: 420px;" Class="mud-width-full rounded-xl">
+        <MudCarousel TData="FeatureCard" EnableSwipeGesture="true" AutoCycleTime="@TimeSpan.FromSeconds(5)" AutoCycle="true" ShowArrows="false" ShowBullets="false" Style="height: 420px;" Class="mud-width-full rounded-xl">
             @foreach (var card in cards)
             {
-                <MudCarouselItem Transition="Transition.Slide">
-                    <div class=@("d-flex justify-center align-center " + (_theme == "dark" ? "glass-rgb-bg" : "glass-cmyk-bg")) style="height: 100%;">
-                        <MudCard Elevation="0" Class="ma-6 d-flex flex-column align-center " Style="max-width: 600px; width: 100%;">
-                            <div class="@(_theme == "dark" ? "glass-rgb-bg" : "glass-cmyk-bg")" style="width: 100%;">
-                                <MudCardHeader Style="width: 100%;">
-                                    <CardHeaderAvatar>
-                                        <MudIcon Icon="@card.Icon" Size="Size.Large" Color="Color.Primary" />
-                                    </CardHeaderAvatar>
-                                    <CardHeaderContent>
-                                        <MudText Typo="Typo.h5" Style="font-weight: 700;">@card.Title</MudText>
-                                        <MudText Typo="Typo.subtitle1" Color="Color.Secondary">@card.Subtitle</MudText>
-                                    </CardHeaderContent>
-                                </MudCardHeader>
-                            </div>
-                            <MudCardContent Class="ma-6">
-                                <MudText Color="Color.Dark" Typo="Typo.body1">@card.Description</MudText>
-                                <MudList T="MudText" Class="ma-2">
-                                    @foreach (var benefit in card.BulletPoints)
-                                    {
-                                        <MudListItem Icon="@Icons.Material.Filled.Check" IconColor="Color.Success">
-                                            <MudText Color="Color.Dark" Typo="Typo.h6">@benefit</MudText>
-                                        </MudListItem>
-                                    }
-                                </MudList>
-                            </MudCardContent>
-                        </MudCard>
-                    </div>
+                <MudCarouselItem Class="d-flex justify-center align-center" Style="height: 100%;" Transition="Transition.Slide">
+                    <MudCard Elevation="0" Class="ma-6 " Style="max-width: 600px; width: 100%;">
+                        <MudCardHeader Class="glass-royal-bg" Style="width: 100%;">
+                            <CardHeaderAvatar>
+                                <MudIcon Icon="@card.Icon" Size="Size.Large" Color="Color.Primary" />
+                            </CardHeaderAvatar>
+                            <CardHeaderContent>
+                                <MudText Typo="Typo.h5" Style="font-weight: 700;">@card.Title</MudText>
+                                <MudText Typo="Typo.subtitle1" Color="Color.Secondary">@card.Subtitle</MudText>
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                        <MudCardContent Class="ma-6">
+                            <MudText Color="Color.Dark" Typo="Typo.body1">@card.Description</MudText>
+                            <MudList T="MudText" Class="ma-2">
+                                @foreach (var benefit in card.BulletPoints)
+                                {
+                                    <MudListItem Icon="@Icons.Material.Filled.Check" IconColor="Color.Success">
+                                        <MudText Color="Color.Dark" Typo="Typo.h6">@benefit</MudText>
+                                    </MudListItem>
+                                }
+                            </MudList>
+                        </MudCardContent>
+                    </MudCard>
                 </MudCarouselItem>
             }
         </MudCarousel>
@@ -70,21 +66,23 @@
             @foreach (var item in items)
             {
                 <MudItem xs="12" md="4">
-                    <MudCard Elevation="0" Class=@("ma-6 d-flex flex-column align-center "+ (_theme == "dark" ? "glass-rgb-bg" : "glass-cmyk-bg")) Style="height: 100%;">
-                        <MudCardHeader Class="@(_theme == "dark" ? "glass-rgb-bg" : "glass-cmyk-bg")" Style="width:100%; height:15%">
+                    <MudCard Elevation="0" Class="ma-6 d-flex flex-column align-center" Style="height: 100%;">
+                        <MudCardHeader Class="glass-royal-bg" Style="width:100%; height:15%">
                             <CardHeaderAvatar>
-                                <MudIcon Icon="@item.Icon" Size="Size.Large" Color="Color.Primary" />
+                                <MudIcon Icon="@item.Icon" Size="Size.Large" Color="Color.Inherit" />
                             </CardHeaderAvatar>
                             <CardHeaderContent>
-                                <MudText Typo="Typo.h6" Style="font-weight: 600;">@item.Title</MudText>
+                                <MudText Color=Color.Inherit Typo="Typo.h6" Style="font-weight: 600;">@item.Title</MudText>
                             </CardHeaderContent>
                         </MudCardHeader>
-                        <div class="d-flex flex-wrap justify-center gap-2 mt-4">
-                            @foreach (var chip in item.Chips)
-                            {
-                                <MudChip T="string" Color=Color.Dark Variant="Variant.Filled" Class="rb-rr-gradient">@chip</MudChip>
-                            }
-                        </div>
+                        <MudCardContent>
+                            <MudChipSet T=string Class="d-flex flex-wrap justify-center gap-2 mt-4">
+                                @foreach (var chip in item.Chips)
+                                {
+                                    <MudChip T="string" Color=Color.Dark Variant="Variant.Filled" Class="rb-rr-gradient">@chip</MudChip>
+                                }
+                            </MudChipSet>
+                        </MudCardContent>
                     </MudCard>
                 </MudItem>
             }
@@ -126,8 +124,8 @@
 
     private void SettingsChanged()
     {
-        _theme = Settings.Settings.Theme;
-        _language = Settings.Settings.Language;
+        _theme = Settings.Settings.Theme ?? "light";
+        _language = Settings.Settings.Language ?? "pt-BR";
         StateHasChanged();
     }
 

@@ -1,16 +1,34 @@
-﻿ 
+﻿@inject IAppLocalizer Localizer
+@inject Application.Services.Abstract.IBrowserSettingsService SettingsService
+@implements IDisposable
+
 <MudNavMenu>
     <MudList T="MudNavLink">
-        <MudNavLink Icon="@Icons.Material.Filled.Home" IconColor="Color.Default" Href="/" Match="NavLinkMatch.All"><MudText Color="Color.Default">Home</MudText></MudNavLink>
+        <MudNavLink Icon="@Icons.Material.Filled.Home" IconColor="Color.Dark" Href="/" Match="NavLinkMatch.All"><MudText Color="Color.Tertiary">Home</MudText></MudNavLink>
         <MudDivider DividerType="DividerType.FullWidth" />
-        <MudNavLink Icon="@Icons.Material.Filled.Apps" IconColor="Color.Default" Href="/projects" Match="NavLinkMatch.Prefix"><MudText Color="Color.Default">Projects</MudText></MudNavLink>
+        <MudNavLink Icon="@Icons.Material.Filled.Apps" IconColor="Color.Dark" Href="/projects" Match="NavLinkMatch.Prefix"><MudText Color="Color.Tertiary">Projects</MudText></MudNavLink>
         <MudDivider DividerType="DividerType.FullWidth" />
-        <MudNavGroup Icon="@Icons.Material.Filled.WorkHistory" IconColor="Color.Default" Title="Work Experience" Expanded="true">
-            <MudNavLink Href="/in-office" IconColor="Color.Default" Icon="@Icons.Material.Filled.WorkHistory" Match="NavLinkMatch.Prefix"><MudText Color=Color.Default>In-office</MudText></MudNavLink>
+        <MudNavGroup Icon="@Icons.Material.Filled.WorkHistory" IconColor="Color.Dark" Title="Work Experience" Expanded="true">
+            <MudNavLink Href="/in-office" IconColor="Color.Dark" Icon="@Icons.Material.Filled.WorkHistory" Match="NavLinkMatch.Prefix"><MudText Color=Color.Tertiary>In-office</MudText></MudNavLink>
             <MudDivider DividerType="DividerType.Middle" />
-            <MudNavLink Href="/freelancer" IconColor="Color.Default" Icon="@Icons.Material.Filled.FreeCancellation" Match="NavLinkMatch.Prefix"><MudText Color=Color.Default>Freelancer</MudText></MudNavLink>
+            <MudNavLink Href="/freelancer" IconColor="Color.Dark" Icon="@Icons.Material.Filled.FreeCancellation" Match="NavLinkMatch.Prefix"><MudText Color=Color.Tertiary>Freelancer</MudText></MudNavLink>
         </MudNavGroup>
         <MudDivider DividerType="DividerType.FullWidth" />
-        <MudNavLink IconColor="Color.Default" Icon="@Icons.Material.Filled.Person" Href="/contact" Match="NavLinkMatch.Prefix"><MudText Color=Color.Default>Contact</MudText></MudNavLink>
+        <MudNavLink IconColor="Color.Dark" Icon="@Icons.Material.Filled.Person" Href="/contact" Match="NavLinkMatch.Prefix"><MudText Color=Color.Tertiary>Contact</MudText></MudNavLink>
     </MudList>
 </MudNavMenu> 
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        this.SettingsService.OnSettingsChanged += SettingsChanged;
+        await this.SettingsService.InitializeAsync();
+        await base.OnInitializedAsync();
+    }
+
+    private void SettingsChanged()
+    {
+        StateHasChanged();
+    }
+    public void Dispose() => SettingsService.OnSettingsChanged -= SettingsChanged;
+}
