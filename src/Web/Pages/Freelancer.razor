@@ -1,43 +1,44 @@
 ﻿@page "/freelancer"
-@inject IBrowserSettingsService Settings
+@inject IBrowserStorageService Settings
 @inject IJSRuntime JS
+@inject ILocalizer Localizer
 @implements IDisposable
 
 <PageTitle>Freelancer | Portfólio</PageTitle>
 
 <MudContainer Class="pa-10" Style="height:100vh;">
-    <MudText Color=Color.Tertiary Typo="Typo.h3" GutterBottom="true" Align="Align.Center">Trabalho Autônomo & Consultoria</MudText>
-    <MudText Color=Color.Tertiary Typo="Typo.subtitle1" Align="Align.Center" Class="mb-10">Desenvolvimento de soluções sob medida para clientes finais e empresas parceiras.</MudText>
+    <MudText Color=Color.Tertiary Typo="Typo.h3" GutterBottom="true" Align="Align.Center">@Localizer["AutonomousJobLabel"]</MudText>
+    <MudText Color=Color.Tertiary Typo="Typo.subtitle1" Align="Align.Center" Class="mb-10">@Localizer["SolutionDevLabel"]</MudText>
 
     <MudGrid>
         <MudItem xs="12" md="6">
             <MudCard Elevation="2">
-                <MudCardHeader Class="glass-royal-bg">
+                <MudCardHeader Class="glass-royal-bg border-bg">
                     <CardHeaderAvatar>
                         <MudIcon Icon="@Icons.Material.Filled.Architecture" Color="Color.Tertiary" Size="Size.Large" />
                     </CardHeaderAvatar>
                     <CardHeaderContent>
-                        <MudText Color=Color.Primary Typo="Typo.h6">Arquitetura e Desenho de Soluções</MudText>
+                        <MudText Color=Color.Primary Typo="Typo.h6">@Localizer["ArchitectureLabel"]</MudText>
                     </CardHeaderContent>
                 </MudCardHeader>
                 <MudCardContent>
-                    <MudText Color=Color.Primary Typo="Typo.body2">Auxilio clientes a tirarem suas ideias do papel de forma técnica, escolhendo a melhor infraestrutura, banco de dados e arquitetura de software para garantir que o projeto escale.</MudText>
+                    <MudText Color=Color.Primary Typo="Typo.body2">@Localizer["HelpLabel"]</MudText>
                 </MudCardContent>
             </MudCard>
         </MudItem>
 
         <MudItem xs="12" md="6">
             <MudCard Elevation="2">
-                <MudCardHeader Class="glass-royal-bg">
+                <MudCardHeader Class="glass-royal-bg border-bg">
                     <CardHeaderAvatar>
                         <MudIcon Icon="@Icons.Material.Filled.Speed" Color="Color.Secondary" Size="Size.Large" />
                     </CardHeaderAvatar>
                     <CardHeaderContent>
-                        <MudText Color=Color.Primary Typo="Typo.h6">Otimização e Resolução de Gargalos</MudText>
+                        <MudText Color=Color.Primary Typo="Typo.h6">@Localizer["OptimizationLabel"]</MudText>
                     </CardHeaderContent>
                 </MudCardHeader>
                 <MudCardContent>
-                    <MudText Color=Color.Primary Typo="Typo.body2">Análise de código-fonte de sistemas lentos em produção e reescrita de gargalos em .NET para trazer performance máxima e diminuir custos de nuvem.</MudText>
+                    <MudText Color=Color.Primary Typo="Typo.body2">@Localizer["SourceAnalisysLabel"]</MudText>
                 </MudCardContent>
             </MudCard>
         </MudItem>

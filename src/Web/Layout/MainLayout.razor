@@ -1,7 +1,7 @@
 ﻿@using Web.Theme
 @inherits LayoutComponentBase
-
-@inject Application.Services.Abstract.IBrowserSettingsService SettingsService
+@inject NavigationManager Navigation
+@inject Application.Services.Abstract.IBrowserStorageService SettingsService
 
 @implements IDisposable
 
@@ -11,27 +11,68 @@
 <MudDialogProvider />
 <MudSnackbarProvider />
 
-<MudLayout Class="rp-ap-gradient">
-    <AppBar Open="@_drawerOpen" IsDark="@_isDarkMode" Language="@_language" />
-    <MudDrawer Class="rp-ap-gradient" @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
-        <NavMenu />
+<MudLayout>
+    <MudAppBar Class="glass-royal-bg" Elevation="1">
+        <MudIconButton Icon="@(_drawerOpen ? Icons.Material.Filled.MenuOpen : Icons.Material.Filled.Menu)" Color=Color.Primary Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+        <MudText Typo="Typo.h6" Class="ml-2" HtmlTag="b" Color="@(_isDarkMode ? Color.Primary : Color.Tertiary)">@Localizer["ApplicationTitle"]</MudText>
+        <MudSpacer />
+        <MudIconButton Icon="@(_isDarkMode ? Icons.Material.Filled.LightMode : Icons.Material.Filled.DarkMode)"
+                       Color=Color.Primary
+                       OnClick="OnToggleDarkModeAsync" />
+
+        <MudMenu Icon="@Icons.Material.Filled.Texture" Color=Color.Primary Dense="true">
+            <MudMenuItem OnClick='() => OnThemeMenuItemClick("royal")'>Royal Blue</MudMenuItem>
+            <MudMenuItem OnClick='() => OnThemeMenuItemClick("sky")'>Sky Blue</MudMenuItem>
+        </MudMenu>
+
+        <MudMenu Icon="@Icons.Material.Filled.Language" Color=Color.Primary Dense="true">
+            <MudMenuItem OnClick='() => OnLanguageMenuItemClickAsync("pt-BR")'>Português (BR)</MudMenuItem>
+            <MudMenuItem OnClick='() => OnLanguageMenuItemClickAsync("en-US")'>English   (US)</MudMenuItem>
+        </MudMenu>
+
+        <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color=Color.Primary Edge="Edge.End" />
+    </MudAppBar>
+
+    <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
+        <MudNavMenu>
+            <MudList T="MudNavLink">
+                <MudNavLink Icon="@Icons.Material.Filled.Home" IconColor="Color.Primary" Href="/" Match="NavLinkMatch.All">
+                    <MudText Color="Color.Tertiary">@Localizer["Home"]</MudText>
+                </MudNavLink>
+                <MudDivider DividerType="DividerType.FullWidth" />
+                <MudNavLink Icon="@Icons.Material.Filled.Apps" IconColor="Color.Primary" Href="/projects" Match="NavLinkMatch.Prefix">
+                    <MudText Color="Color.Tertiary">@Localizer["Projects"]</MudText>
+                </MudNavLink>
+                <MudDivider DividerType="DividerType.FullWidth" />
+                <MudNavGroup Icon="@Icons.Material.Filled.WorkHistory" IconColor="Color.Primary" Expanded="true">
+                    <TitleContent>
+                        <MudText Color="Color.Primary" Align="Align.Center" Typo="Typo.body1">@Localizer["WorkExperience"]</MudText>
+                    </TitleContent>
+                    <ChildContent>
+                        <MudNavLink Icon="@Icons.Material.Filled.WorkHistory" IconColor="Color.Primary" Href="/in-office" Match="NavLinkMatch.Prefix"><MudText Color=Color.Tertiary>@Localizer["InOffice"]</MudText></MudNavLink>
+                        <MudDivider DividerType="DividerType.Middle" />
+                        <MudNavLink Icon="@Icons.Material.Filled.FreeCancellation" IconColor="Color.Primary" Href="/freelancer" Match="NavLinkMatch.Prefix"><MudText Color=Color.Tertiary>@Localizer["Freelancer"]</MudText></MudNavLink>
+                    </ChildContent>
+                </MudNavGroup>
+                <MudDivider DividerType="DividerType.FullWidth" />
+                <MudNavLink Icon="@Icons.Material.Filled.Person" IconColor="Color.Primary" Href="/contact" Match="NavLinkMatch.Prefix"><MudText Color=Color.Tertiary>@Localizer["Contact"]</MudText></MudNavLink>
+            </MudList>
+        </MudNavMenu>
     </MudDrawer>
-    <MudMainContent Class="rp-ap-gradient">
+    <MudMainContent>
         @Body
     </MudMainContent>
 </MudLayout>
 
-
 @code {
-    private bool _drawerOpen = true;
+    private bool _drawerOpen = false;
+    private bool _isDarkMode = false;
+    private bool _isRoyalTheme = true;
+    private string _language = "pt-BR";
+    private string _theme = "royal";
     private MudThemeProvider _mudThemeProvider = default!;
     private MudTheme _customTheme = new MudTheme();
-    private string _language;
-    private bool _isDarkMode;
-    private void DrawerToggle()
-    {
-        _drawerOpen = !_drawerOpen;
-    }
+
     protected override async Task OnInitializedAsync()
     {
         SettingsService.OnSettingsChanged += OnSettingsChanged;
@@ -43,29 +84,46 @@
 
     private void ApplySettings()
     {
-        _isDarkMode = SettingsService.Settings.Theme == "dark";
-        _customTheme = _isDarkMode ? AppTheme.RoyalBlueTheme : AppTheme.SkyBlueTheme;
+        _isDarkMode = SettingsService.Settings.DarkMode;
+        _theme = SettingsService.Settings.Theme!;
+        _customTheme = _theme == "royal" ? AppTheme.RoyalBlueTheme : AppTheme.SkyBlueTheme;
         _language = SettingsService.Settings.Language ??= "pt-BR";
         CultureInfo culture = new(_language);
-        culture.SetCurrentCulture(_language);
-    }
-
-    private async Task ToggleThemeAsync()
-    {
-        var newTheme = _isDarkMode ? "light" : "dark";
-        _customTheme = _isDarkMode ? AppTheme.RoyalBlueTheme : AppTheme.SkyBlueTheme;
-        await SettingsService.UpdateThemeAsync(newTheme);
-    }
-
-    private async Task ToggleLanguageAsync()
-    {
-        var culture = new CultureInfo(_language);
         culture.SetCurrentCulture(_language);
     }
 
     private async Task ChangeLanguageAsync(string lang)
     {
         await SettingsService.UpdateLanguageAsync(lang);
+        ToggleLanguage(new CultureInfo(_language = lang));
+        StateHasChanged();
+    }
+
+    private async Task ToggleThemeAsync()
+    {
+        var newTheme = SettingsService.Settings.Theme == "sky" ? "royal" : "sky";
+        _customTheme = newTheme == "royal" ? AppTheme.RoyalBlueTheme : AppTheme.SkyBlueTheme;
+        await SettingsService.UpdateThemeAsync(newTheme);
+    }
+
+    private void ChangeTheme(string theme) => (_theme, SettingsService.Settings.Theme, _customTheme) = (theme, theme, theme == "royal" ? AppTheme.RoyalBlueTheme : AppTheme.SkyBlueTheme);
+
+    private void ToggleLanguage(CultureInfo culture) 
+    {
+        culture.SetCurrentCulture(_language); 
+        Navigation.Refresh(true);
+    }
+
+    public void Dispose() => SettingsService.OnSettingsChanged -= OnSettingsChanged;
+
+    private void DrawerToggle() => _drawerOpen = !_drawerOpen;
+
+    private async Task OnLanguageMenuItemClickAsync(string language) => await ChangeLanguageAsync(_language = language ??= "pt-BR");
+
+    private async Task OnToggleDarkModeAsync() 
+    {
+        _isDarkMode = !_isDarkMode;
+        await SettingsService.UpdateIsDarkMode(_isDarkMode);
         StateHasChanged();
     }
 
@@ -75,8 +133,10 @@
         StateHasChanged();
     }
 
-    public void Dispose()
+    private async Task OnThemeMenuItemClick(string theme)
     {
-        SettingsService.OnSettingsChanged -= OnSettingsChanged;
+        ChangeTheme(theme);
+        await ToggleThemeAsync();
+        StateHasChanged();
     }
 }

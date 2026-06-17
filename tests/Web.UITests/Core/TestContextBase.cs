@@ -11,8 +11,8 @@ namespace Web.UITests.Core;
 
 public abstract class TestContextBase : BunitContext
 {
-    protected Mock<IBrowserSettingsService> SettingsServiceMock { get; } = new();
-    protected Mock<IAppLocalizer> LocalizerMock { get; } = new();
+    protected Mock<IBrowserStorageService> SettingsServiceMock { get; } = new();
+    protected Mock<ILocalizer> LocalizerMock { get; } = new();
     protected Mock<IJSRuntime> JSRuntimeMock { get; } = new();
 
     protected TestContextBase()

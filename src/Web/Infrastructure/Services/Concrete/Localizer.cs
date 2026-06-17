@@ -1,12 +1,10 @@
-using Microsoft.Extensions.Localization;
-using Web.Application.Services.Abstract;
 namespace Web.Infrastructure.Services.Concrete;
 
-public class AppLocalizer(IStringLocalizerFactory factory) : IAppLocalizer
+public class Localizer(IStringLocalizerFactory factory) : ILocalizer
 {
     private readonly IStringLocalizer _localizer = factory.Create(
             "AppResources",
-            typeof(AppLocalizer).Assembly.FullName!
+            typeof(Localizer).Assembly.FullName!
         );
 
     public string this[string key] => _localizer[key];

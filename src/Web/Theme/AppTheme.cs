@@ -3,6 +3,7 @@
 using MudBlazor;
 public static class AppTheme
 {
+    public static MudTheme CurrentTheme = RoyalBlueTheme;
     // ==========================================
     // TEMA 1: ROYAL BLUE THEME
     // ==========================================
@@ -155,7 +156,7 @@ public static class AppTheme
             DarkDarken = "#020617",
             DarkContrastText = "#E5E7EB"
         },
-        LayoutProperties = new LayoutProperties() { DefaultBorderRadius = "28px" }
+        LayoutProperties = new LayoutProperties() { DefaultBorderRadius = "28px", AppbarHeight = "30px" },
     };
     public static MudTheme SkyBlueTheme => new()
     {
@@ -178,7 +179,7 @@ public static class AppTheme
 
             Background = "#F8FAFC",       
             BackgroundGray = "#F1F5F9",   
-            Surface = "#FFFFFF",          
+            Surface = "#F0F0F0",          
 
             AppbarBackground = "#0284C7",
             AppbarText = "#FFFFFF",
@@ -307,6 +308,6 @@ public static class AppTheme
             DarkDarken = "#000000",
             DarkContrastText = "#F8FAFC"
         },
-        LayoutProperties = new LayoutProperties() { DefaultBorderRadius = "28px" }
+        LayoutProperties = new LayoutProperties() { DefaultBorderRadius = "28px", AppbarHeight = "30px" },
     };
 }

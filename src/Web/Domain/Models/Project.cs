@@ -1,6 +1,6 @@
 ﻿namespace Web.Domain.Models;
 
-public class ProjectData
+public class Project
 {
     public string Icon { get; set; } = string.Empty;
     public string Title { get; set; } = string.Empty;

@@ -6,12 +6,12 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddMudServices();
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-builder.Services.AddScoped<IBrowserSettingsService, BrowserSettingsService>();
+builder.Services.AddScoped<IBrowserStorageService, BrowserStorageService>();
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
-builder.Services.AddSingleton<IAppLocalizer, AppLocalizer>();
+builder.Services.AddSingleton<ILocalizer, Localizer>();
 var app = builder.Build();
 var sp = app.Services.CreateScope();
-var bs = sp.ServiceProvider.GetRequiredService<IBrowserSettingsService>();
+var bs = sp.ServiceProvider.GetRequiredService<IBrowserStorageService>();
 await bs.InitializeAsync();
 var userCulture = await bs.GetCurrentLanguageAsync();
 

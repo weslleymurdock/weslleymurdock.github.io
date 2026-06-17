@@ -1,5 +1,5 @@
 ﻿@page "/in-office"
-@inject IBrowserSettingsService Settings
+@inject IBrowserStorageService SettingsService
 @implements IDisposable
 
 <PageTitle>@Localizer["InOfficeActPageTitle"]</PageTitle>
@@ -19,21 +19,21 @@
         }
         else
         {
-            @foreach (var item in experiences)
+            @foreach (var item in experiences[_culture])
             {
                 <MudTimelineItem Color="Color.Success" Elevation="25">
                     <ItemContent>
                         <MudCard>
-                            <MudCardHeader Class=@("pa-5 " + "glass-royal-bg")>
+                            <MudCardHeader Class=@("pa-5 " + "glass-royal-bg border-bg ")>
                                 <MudText Typo="Typo.h5" Color="Color.Primary">@item.Title</MudText>
                             </MudCardHeader>
                             <MudCardContent Class="pa-5 ma-5">
-                                <MudText Class=@("pa-4 ma-2 " + "glass-royal-bg") Color=Color.Primary Typo="Typo.h6">@item.Company (@(DateTime.Parse(@item.StartDate).ToString(System.Globalization.CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern)) - @(DateTime.Parse(@item.EndDate).ToString(System.Globalization.CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern)))</MudText>
+                                <MudText Class=@("pa-4 ma-2 " + "glass-royal-bg border-bg ") Color=Color.Primary Typo="Typo.h6">@item.Company (@(DateTime.Parse(@item.StartDate).ToString(System.Globalization.CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern)) - @(DateTime.Parse(@item.EndDate).ToString(System.Globalization.CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern)))</MudText>
                                 <MudText Color=Color.Surface Typo="Typo.body1" Class="pa-4 ma-2 "> @item.JobDescription </MudText>
                             </MudCardContent>
                             <MudCardActions Class="pa-5 ma-5">
                                 <div>
-                                <MudText Color=Color.Primary Typo="Typo.h6" Class=@("pa-4 ma-2 " + "glass-royal-bg")> Tech Stack </MudText>
+                                <MudText Color=Color.Primary Typo="Typo.h6" Class=@("pa-4 ma-2 " + "glass-royal-bg border-bg ")> Tech Stack </MudText>
                                 <MudChipSet T="MudChip<MudText>" Class="ma-4" Color="Color.Dark" Size="Size.Small">
                                     @foreach (var tech in item.Technologies)
                                     {
@@ -50,35 +50,39 @@
     </MudTimeline>
 </MudContainer>
 @code {
-    
-    private string _theme = "light";
+
+    private string _theme = "royal";
     private string _culture = "pt-BR";
-    private List<InOfficeExperience>? experiences;
+    private bool _isDarkMode = true;
+    private Dictionary<string, InOfficeExperience[]>? experiences;
 
     protected override async Task OnInitializedAsync()
     {
-        Settings.OnSettingsChanged -= SettingsChanged;
-        Settings.OnSettingsChanged += SettingsChanged;
-        await Settings.InitializeAsync();
-        _theme = await Settings.GetCurrentThemeAsync();
+
+        SettingsService.OnSettingsChanged -= SettingsChanged;
+        SettingsService.OnSettingsChanged += SettingsChanged;
+        await SettingsService.InitializeAsync();
+        _culture = await SettingsService.GetCurrentLanguageAsync();
+        _theme = await SettingsService.GetCurrentThemeAsync();
+        _isDarkMode = await SettingsService.GetIsDarkModeAsync();
         await base.OnInitializedAsync();
     }
 
     private void SettingsChanged()
     {
-        _theme = Settings?.Settings?.Theme ?? "light";
-        _culture = Settings?.Settings?.Language ?? "pt-BR";
+        _theme = SettingsService?.Settings?.Theme ?? "light";
+        _culture = SettingsService?.Settings?.Language ?? "pt-BR";
         StateHasChanged();
     }
 
-    public void Dispose() => Settings.OnSettingsChanged -= SettingsChanged;
+    public void Dispose() => SettingsService.OnSettingsChanged -= SettingsChanged;
 
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender || experiences == null || experiences.Count <= 0)
         {
-            experiences = await Http.GetFromJsonAsync<List<InOfficeExperience>>("data/inoffice.json");
+            experiences = await Http.GetFromJsonAsync<Dictionary<string, InOfficeExperience[]>>("data/inoffice.json");
 
             StateHasChanged();
         }

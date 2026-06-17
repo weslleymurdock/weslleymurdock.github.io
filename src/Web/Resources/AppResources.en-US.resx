@@ -120,20 +120,44 @@
   <data name="ApplicationTitle" xml:space="preserve">
     <value>Weslley Luiz</value>
   </data>
+  <data name="ArchitectureLabel" xml:space="preserve">
+    <value>Architecture and Solution Design</value>
+  </data>
+  <data name="AutonomousJobLabel" xml:space="preserve">
+    <value>Autonomous and Consultanting Work</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
   <data name="ContactLabel" xml:space="preserve">
     <value>Contact</value>
   </data>
   <data name="ContactPageTitle" xml:space="preserve">
     <value>Contact | Portfolio</value>
   </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
   <data name="EmailMandatoryLabel" xml:space="preserve">
     <value>The email is mandatory!</value>
+  </data>
+  <data name="Freelancer" xml:space="preserve">
+    <value>Freelancer</value>
+  </data>
+  <data name="HelpLabel" xml:space="preserve">
+    <value>I help clients bring their ideas to life technically, choosing the best infrastructure, database, and software architecture to ensure the project scales.</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
   </data>
   <data name="HomePageCenterText" xml:space="preserve">
     <value>Fields of work</value>
   </data>
   <data name="HomePageTitle" xml:space="preserve">
     <value>Home | Portfolio</value>
+  </data>
+  <data name="InOffice" xml:space="preserve">
+    <value>In-office</value>
   </data>
   <data name="InOfficeAct" xml:space="preserve">
     <value>In-Office act</value>
@@ -150,6 +174,15 @@
   <data name="JobTitle" xml:space="preserve">
     <value>.NET Full-Stack Developer</value>
   </data>
+  <data name="MainlyTechStacks" xml:space="preserve">
+    <value>Mainly Tech Stack's</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
   <data name="NameMandatoryLabel" xml:space="preserve">
     <value>The name is mandatory!</value>
   </data>
@@ -162,8 +195,14 @@
   <data name="NotFoundPageTitle" xml:space="preserve">
     <value>Not Found | Portifolio</value>
   </data>
+  <data name="OptimizationLabel" xml:space="preserve">
+    <value>Optimization and Bottleneck Resolution</value>
+  </data>
   <data name="ProfileLabel" xml:space="preserve">
     <value>Liked my profile? Lets work together!</value>
+  </data>
+  <data name="Projects" xml:space="preserve">
+    <value>Projects</value>
   </data>
   <data name="ProjectsPageTitle" xml:space="preserve">
     <value>Projects | Portfolio</value>
@@ -179,6 +218,15 @@
   </data>
   <data name="SendWhatsApp" xml:space="preserve">
     <value>WhatsApp</value>
+  </data>
+  <data name="SolutionDevLabel" xml:space="preserve">
+    <value>Developing customized solutions for end customers and partner companies.</value>
+  </data>
+  <data name="SourceAnalisysLabel" xml:space="preserve">
+    <value>Source code analysis of slow production systems and rewriting bottlenecks in .NET to deliver maximum performance and reduce cloud costs.</value>
+  </data>
+  <data name="WorkExperience" xml:space="preserve">
+    <value>Work Experience</value>
   </data>
   <data name="WriteMessageLabel" xml:space="preserve">
     <value>Please write a message.</value>

@@ -121,6 +121,18 @@
     <value>Weslley Luiz</value>
     <comment>Titulo da appbar</comment>
   </data>
+  <data name="ArchitectureLabel" xml:space="preserve">
+    <value>Arquitetura e Desenho de Soluções</value>
+    <comment>Label Arquitetura e Desenho de Soluções</comment>
+  </data>
+  <data name="AutonomousJobLabel" xml:space="preserve">
+    <value>Trabalho Autônomo &amp; Consultoria</value>
+    <comment>Label Trabalho Autônomo &amp; Consultoria</comment>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contato</value>
+    <comment>Menu Contato</comment>
+  </data>
   <data name="ContactLabel" xml:space="preserve">
     <value>Contato</value>
     <comment>Label contato</comment>
@@ -129,9 +141,25 @@
     <value>Contato | Portfólio</value>
     <comment>Titulo da página contato</comment>
   </data>
+  <data name="Email" xml:space="preserve">
+    <value>E-mail</value>
+    <comment>Label E-mail</comment>
+  </data>
   <data name="EmailMandatoryLabel" xml:space="preserve">
     <value>O e-mail é obrigatório!</value>
     <comment>Erro de email obrigatório</comment>
+  </data>
+  <data name="Freelancer" xml:space="preserve">
+    <value>Freelancer</value>
+    <comment>Freelancer</comment>
+  </data>
+  <data name="HelpLabel" xml:space="preserve">
+    <value>Auxilio clientes a tirarem suas ideias do papel de forma técnica, escolhendo a melhor infraestrutura, banco de dados e arquitetura de software para garantir que o projeto escale.</value>
+    <comment>Label Auxilio.</comment>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Inicio</value>
+    <comment>Menu Início</comment>
   </data>
   <data name="HomePageCenterText" xml:space="preserve">
     <value>Áreas de Especialidade</value>
@@ -140,6 +168,10 @@
   <data name="HomePageTitle" xml:space="preserve">
     <value>Início  | Portfólio</value>
     <comment>Titulo da home page</comment>
+  </data>
+  <data name="InOffice" xml:space="preserve">
+    <value>Corporativa</value>
+    <comment>In-office</comment>
   </data>
   <data name="InOfficeAct" xml:space="preserve">
     <value>Atuação Corporativa</value>
@@ -161,6 +193,18 @@
     <value>Desenvolvedor .NET Full Stack</value>
     <comment>Titulo da função</comment>
   </data>
+  <data name="MainlyTechStacks" xml:space="preserve">
+    <value>Tech Stack's principais</value>
+    <comment>SubTítulo da seção</comment>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Mensagem</value>
+    <comment>Label Mensagem</comment>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nome</value>
+    <comment>Label nome</comment>
+  </data>
   <data name="NameMandatoryLabel" xml:space="preserve">
     <value>O nome é obrigatório!</value>
     <comment>Erro de nome obrigatório</comment>
@@ -177,9 +221,17 @@
     <value>Não Encontrado | Portifólio</value>
     <comment>Titulo da pátina não encontrado</comment>
   </data>
+  <data name="OptimizationLabel" xml:space="preserve">
+    <value>Otimização e Resolução de Gargalos</value>
+    <comment>Label Otimização e Resolução de Gargalos</comment>
+  </data>
   <data name="ProfileLabel" xml:space="preserve">
     <value>Gostou do meu perfil? Vamos trabalhar juntos!</value>
     <comment>Label do perfil</comment>
+  </data>
+  <data name="Projects" xml:space="preserve">
+    <value>Projetos</value>
+    <comment>Menu Projetos</comment>
   </data>
   <data name="ProjectsPageTitle" xml:space="preserve">
     <value>Projetos | Portifólio</value>
@@ -200,6 +252,18 @@
   <data name="SendWhatsApp" xml:space="preserve">
     <value>WhatsApp</value>
     <comment>Botão whatsapp</comment>
+  </data>
+  <data name="SolutionDevLabel" xml:space="preserve">
+    <value>Desenvolvimento de soluções sob medida para clientes finais e empresas parceiras.</value>
+    <comment>Label Desenvolvimento de soluções.</comment>
+  </data>
+  <data name="SourceAnalisysLabel" xml:space="preserve">
+    <value>Análise de código-fonte de sistemas lentos em produção e reescrita de gargalos em .NET para trazer performance máxima e diminuir custos de nuvem.</value>
+    <comment>Label Análise de código-fonte</comment>
+  </data>
+  <data name="WorkExperience" xml:space="preserve">
+    <value>Experiência de trabalho</value>
+    <comment>Menu Work Experience</comment>
   </data>
   <data name="WriteMessageLabel" xml:space="preserve">
     <value>Por favor, escreva uma mensagem.</value>

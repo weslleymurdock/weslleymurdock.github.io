@@ -1,5 +1,4 @@
 ﻿namespace Web.Domain.Models;
-
 public class InOfficeExperience
 {
     public string Title { get; set; } = string.Empty;

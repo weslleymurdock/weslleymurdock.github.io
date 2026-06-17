@@ -1,6 +1,6 @@
 namespace Web.Application.Services.Abstract;
 
-public interface IAppLocalizer
+public interface ILocalizer
 {
    string this[string key] { get; }
 }

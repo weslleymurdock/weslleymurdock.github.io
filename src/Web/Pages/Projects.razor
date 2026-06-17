@@ -1,6 +1,6 @@
 ﻿@page "/projects"
 @implements IDisposable
-@inject IBrowserSettingsService SettingsService
+@inject IBrowserStorageService SettingsService
 
 <PageTitle>@Localizer["ProjectsPageTitle"]</PageTitle>
 
@@ -8,7 +8,7 @@
     <MudText Color=Color.Tertiary Typo="Typo.h3" GutterBottom="true" Align="Align.Center">@Localizer["ProjectsTitle"]</MudText>
     <MudText Color=Color.Tertiary Typo="Typo.subtitle1" Align="Align.Center" Class="mb-10">@Localizer["ProjectsSubtitle"]</MudText>
     <MudGrid>
-        @if (projects == null)
+        @if (_projects == null || _projects.Count <= 0)
         {
             <div class="d-flex pa-6 mt-6 mb-6 justify-center">
                 <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
@@ -16,33 +16,54 @@
         }
         else
         {
-            @foreach (ProjectData project in projects)
+            if (_projects.TryGetValue(_language, out var projects))
+            {
+                @foreach (Project project in projects)
+                {
+                    <MudItem xs="12" md="6" lg="6">
+                        <MudCard Elevation="4">
+                            <MudCardHeader Class="glass-royal-bg border-bg">
+                                <CardHeaderAvatar>
+                                    <MudIcon Icon="@project.Icon" Size="Size.Large" Color="Color.Secondary" />
+                                </CardHeaderAvatar>
+                                <CardHeaderContent>
+                                    <MudText Color="Color.Tertiary" Typo="Typo.h5">@project.Title</MudText>
+                                    <MudText Color="Color.Secondary" Typo="Typo.caption">@project.Platform</MudText>
+                                </CardHeaderContent>
+                            </MudCardHeader>
+                            <MudCardContent>
+                                <MudText Color="Color.Surface" Typo="Typo.body2" Class="m-3">@project.Description</MudText>
+                            </MudCardContent>
+                            <MudCardActions>
+                                <MudChipSet T="MudChip<string>" Class="mt-4">
+                                    @foreach (var tech in project.Technologies)
+                                    {
+                                        <MudChip T="string" Size="Size.Medium" Color="Color.Surface" Text="@tech" Class="rp-rt-gradient" Variant="Variant.Filled" />
+                                    }
+                                </MudChipSet>
+                                <MudIconButton Color="Color.Surface" Icon="@Icons.Material.Filled.Link" Variant="Variant.Text">
+                                    <MudLink Href="@(new Uri(@project.Source).AbsoluteUri)" Color="Color.Surface">Ver Projeto</MudLink>
+                                </MudIconButton>
+                            </MudCardActions>
+                        </MudCard>
+                    </MudItem>
+                }
+            }
+            else
             {
                 <MudItem xs="12" md="6" lg="6">
-                    <MudCard Elevation="4" >
-                        <MudCardHeader Class=""glass-royal-bg"">
+                    <MudCard Elevation="4">
+                        <MudCardHeader Class="glass-royal-bg border-bg">
                             <CardHeaderAvatar>
-                                <MudIcon Icon="@project.Icon" Size="Size.Large" Color="Color.Secondary" />
+                                <MudIcon Icon="@Icons.Material.Filled.NotAccessible" Size="Size.Large" Color="Color.Secondary" />
                             </CardHeaderAvatar>
                             <CardHeaderContent>
-                                <MudText Color="Color.Dark" Typo="Typo.h5">@project.Title</MudText>
-                                <MudText Color="Color.Secondary" Typo="Typo.caption" >@project.Platform</MudText>
-                                <MudText Color="Color.Dark" Typo="Typo.body2" Class="m-3">@project.Description</MudText>
+                                <MudText Color="Color.Tertiary" Align="Align.Center" Typo="Typo.h5">Tradução não encontrada</MudText>
                             </CardHeaderContent>
                         </MudCardHeader>
                         <MudCardContent>
-                            <MudChipSet T="MudChip<string>" Class="mt-4" T="MudChip<string>">
-                                @foreach (var tech in project.Technologies)
-                                {
-                                    <MudChip T="string" Size="Size.Medium" Color="Color.Dark" Text="@tech" Style=" background: radial-gradient( circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.25), transparent 55% ), linear-gradient( 120deg,  var(--cmyk-m), var(--cmyk-y)); color: var(--mud-palette-dark);" Variant="Variant.Filled" />
-                                }
-                            </MudChipSet>
+                            <MudText Color="Color.Surface" Align="Align.Center" Typo="Typo.body2">Tradução não encontrada</MudText>
                         </MudCardContent>
-                        <MudCardActions>
-                            <MudIconButton Color="Color.Inherit" Icon="@Icons.Material.Filled.Link" Variant="Variant.Text">
-                                <MudLink Href="@project.Source" Color="Color.Inherit">Ver Projeto</MudLink>
-                            </MudIconButton>
-                        </MudCardActions>
                     </MudCard>
                 </MudItem>
             }
@@ -51,39 +72,34 @@
 </MudContainer>
 @code {
     private string _theme = "light";
-    private string _language = "pt-br";
-    private IList<ProjectData>? projects = [];
+    private string _language = "pt-br"; 
+    private Dictionary<string, Project[]>? _projects = [];
 
-    protected override async  Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
         SettingsService.OnSettingsChanged += SettingsChanged;
         await SettingsService.InitializeAsync();
-        base.OnInitializedAsync();
+        await base.OnInitializedAsync();
     }
 
     private void SettingsChanged()
     {
-        Task.Run(async() => await ApplySettings());
+        Task.Run(async () => await ApplySettingsAsync());
         StateHasChanged();
     }
 
-    private async Task ApplySettings()
-    {
-        _theme = await SettingsService.GetCurrentThemeAsync();
-        _language = await SettingsService.GetCurrentLanguageAsync();
-    }
+    private async Task ApplySettingsAsync() => 
+        (_theme, _language) = (await SettingsService.GetCurrentThemeAsync(), await SettingsService.GetCurrentLanguageAsync());
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender || projects?.Count <= 0)
+        if (firstRender || _projects?.Count <= 0)
         {
-            projects = await Http.GetFromJsonAsync<List<ProjectData>>("data/projects.json");
-            ApplySettings();
+            _projects = await Http.GetFromJsonAsync<Dictionary<string, Project[]>>("data/projects.json");
+            await ApplySettingsAsync();
             StateHasChanged();
         }
     }
-    public void Dispose()
-    {
-       SettingsService.OnSettingsChanged -= SettingsChanged;
-    }
+
+    public void Dispose() => SettingsService.OnSettingsChanged -= SettingsChanged;
 }

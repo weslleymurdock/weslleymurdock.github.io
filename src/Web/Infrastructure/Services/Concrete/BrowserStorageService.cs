@@ -2,14 +2,21 @@ using Microsoft.JSInterop;
 
 namespace Web.Infrastructure.Services.Concrete;
 
-public sealed class BrowserSettingsService(IJSRuntime js) : IBrowserSettingsService
+/// <summary>
+/// Implementation of a <see cref="IBrowserStorageService"/> abstraction service.
+/// </summary>
+/// <param name="js"><see cref="IJSRuntime"/> instance</param>
+public sealed class BrowserStorageService(IJSRuntime js) : IBrowserStorageService
 {
     private const string StorageKey = "wm_user_settings";
 
+    /// <inheritdoc />
     public UserSettings Settings { get; private set; } = new();
 
+    /// <inheritdoc />
     public event Action? OnSettingsChanged;
 
+    /// <inheritdoc />
     public async Task<string> GetCurrentLanguageAsync(bool hard = false)
     {
         if (hard)
@@ -19,6 +26,17 @@ public sealed class BrowserSettingsService(IJSRuntime js) : IBrowserSettingsServ
         return Settings.Language ?? string.Empty;
     }
 
+    /// <inheritdoc />
+    public async Task<bool> GetIsDarkModeAsync(bool hard = false)
+    {
+        if (hard)
+        {
+            await ReadAsync();
+        }
+        return Settings.DarkMode;
+    }
+
+    /// <inheritdoc />
     public async Task<string> GetCurrentThemeAsync(bool hard = false)
     {
         if (hard)
@@ -26,24 +44,6 @@ public sealed class BrowserSettingsService(IJSRuntime js) : IBrowserSettingsServ
             await ReadAsync();
         }
         return Settings.Theme ?? string.Empty;
-    }
-
-    private async Task ReadAsync()
-    {
-        var json = await js.InvokeAsync<string?>("localStorage.getItem", StorageKey);
-
-        if (!string.IsNullOrEmpty(json))
-        {
-            try
-            {
-                Settings = System.Text.Json.JsonSerializer.Deserialize<UserSettings>(json) ?? new();
-            }
-            catch
-            {
-                Settings = new();
-            }
-        }
-
     }
 
     /// <inheritdoc />
@@ -54,9 +54,12 @@ public sealed class BrowserSettingsService(IJSRuntime js) : IBrowserSettingsServ
         // If theme was not manually defined, gets it from browser
         if (string.IsNullOrEmpty(Settings.Theme))
         {
-            var isDarkMode = await js.InvokeAsync<bool>("eval", "window.matchMedia('(prefers-color-scheme: dark)').matches");
-            Settings.Theme = isDarkMode ? "dark" : "light";
+            Settings.Theme = "royal";
         }
+
+        var isDarkMode = await js.InvokeAsync<bool>("eval", "window.matchMedia('(prefers-color-scheme: dark)').matches");
+        Settings.DarkMode = isDarkMode;
+        await SaveToStorageAsync();
 
         // If Locale was not manually defined, gets it from browser
         if (string.IsNullOrEmpty(Settings.Language))
@@ -103,6 +106,33 @@ public sealed class BrowserSettingsService(IJSRuntime js) : IBrowserSettingsServ
                 Settings.Language = "pt-BR";
             }
         }
+    }
+
+    private async Task ReadAsync()
+    {
+        var json = await js.InvokeAsync<string?>("localStorage.getItem", StorageKey);
+
+        if (!string.IsNullOrEmpty(json))
+        {
+            try
+            {
+                Settings = System.Text.Json.JsonSerializer.Deserialize<UserSettings>(json) ?? new();
+            }
+            catch
+            {
+                Settings = new();
+                await SaveToStorageAsync();
+            }
+        }
+
+    }
+
+    /// <inheritdoc />
+    public async Task UpdateIsDarkMode(bool isDarkMode)
+    {
+        Settings.DarkMode = isDarkMode;
+        await SaveToStorageAsync();
+        NotifyStateChanged();
     }
 
     /// <inheritdoc />

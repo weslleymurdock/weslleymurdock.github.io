@@ -7,9 +7,9 @@
 
     <MudPaper Class="ma-8" Elevation="4">
         <MudForm Class="ma-8 mt-10 mb-10 pa-10">
-            <MudTextField T="string" Text="@Name" Label="Nome" Required="true" RequiredError="@Localizer["NameMandatoryLabel"]" Class="mb-4" />
-            <MudTextField T="string" Text="@Email" Label="E-mail" Required="true" RequiredError="@Localizer["EmailMandatoryLabel"]" InputType="InputType.Email" Class="mb-4" />
-            <MudTextField T="string" Text="@Message" Label="Mensagem" Required="true" RequiredError="@Localizer["WriteMessageLabel"]" Lines="5" Class="mb-6" />
+            <MudTextField T="string" Text="@Name" Label="@Localizer["Name"]" Required="true" RequiredError="@Localizer["NameMandatoryLabel"]" Class="mb-4" />
+            <MudTextField T="string" Text="@Email" Label=@Localizer["Email"] Required="true" RequiredError="@Localizer["EmailMandatoryLabel"]" InputType="InputType.Email" Class="mb-4" />
+            <MudTextField T="string" Text="@Message" Label=@Localizer["Message"] Required="true" RequiredError="@Localizer["WriteMessageLabel"]" Lines="5" Class="mb-6" />
             <div class="d-flex justify-start gap-4 mt-10">
                
                 <MudButton Variant="Variant.Filled"
@@ -32,8 +32,8 @@
         </MudForm>
 
         <div class="d-flex justify-center ">
-            <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Size="Size.Large" Color="Color.Dark" Link="https://github.com/weslleymurdock" Target="_blank" />
-            <MudIconButton Icon="@Icons.Custom.Brands.LinkedIn" Size="Size.Large" Color="Color.Info" Link="https://linkedin.com/in/wesll" Target="_blank" />
+            <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Size="Size.Large" Color="Color.Dark" Href="https://github.com/weslleymurdock" Target="_blank" />
+            <MudIconButton Icon="@Icons.Custom.Brands.LinkedIn" Size="Size.Large" Color="Color.Info" Href="https://linkedin.com/in/wesll" Target="_blank" />
         </div>
     </MudPaper>
 </MudContainer>
@@ -41,7 +41,7 @@
 @code {
     private string Name { get; set; } = string.Empty;
     private string Email { get; set; } = string.Empty;
-    private string Number { get; set; } = "5511997885628";
+    private string Number { get; set; } = "5511997884628";
     private string Message { get; set; } = string.Empty;
     private string Template { get; set; } = @"Olá, sou #NAME# e vi seu portfólio, gostaria de conversar mais a respeito. Meu email: #EMAIL#";
     private void OpenWhatsApp()
